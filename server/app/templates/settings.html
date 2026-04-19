@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% block title %}设置 - 智摄{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <span class="eyebrow">Configuration Workspace</span>
+    <h1>系统设置</h1>
+    <p>把首版真正会维护的内容集中到同一页：存储、上传限制、默认模板、保留周期和站点访问地址。</p>
+  </div>
+</section>
+
+<form method="post" action="/settings" class="settings-layout">
+  <div class="settings-stack">
+    <section class="panel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">系统配置</h2>
+          <p class="section-subtitle">更偏运行层的设置放这里，尽量保持少而稳定。</p>
+        </div>
+      </div>
+      <div class="settings-grid">
+        {% for item in settings_items %}
+        {% if item.setting_key in ['storage_root', 'max_package_upload_mb', 'history_keep_days', 'public_base_url', 'timezone'] %}
+        <label class="setting-card">
+          <span>{{ item.setting_key }}</span>
+          <small>{{ item.description or '暂无说明。' }}</small>
+          <input type="text" name="setting__{{ item.setting_key }}" value="{{ item.setting_value }}" />
+        </label>
+        {% endif %}
+        {% endfor %}
+      </div>
+      <div class="divider-space"></div>
+      <div class="toggle-preview">
+        <div>
+          <strong>轻量优先模式</strong>
+          <p class="micro-copy">当前首版默认围绕 2 核 2 GB 服务器约束运行，不引入重型后台组件。</p>
+        </div>
+        <span class="toggle-switch" aria-hidden="true"></span>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">分析模板</h2>
+          <p class="section-subtitle">默认 Prompt 模板绑定在这里维护，减少到处改配置。</p>
+        </div>
+      </div>
+      <div class="settings-grid">
+        {% for item in settings_items %}
+        {% if item.setting_key in ['default_prompt_template_reference', 'default_prompt_template_improve'] %}
+        <label class="setting-card">
+          <span>{{ item.setting_key }}</span>
+          <small>{{ item.description or '暂无说明。' }}</small>
+          <input type="text" name="setting__{{ item.setting_key }}" value="{{ item.setting_value }}" />
+        </label>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+
+    <button class="button" type="submit" style="justify-self: end;">
+      <span class="material-symbols-outlined">save</span>
+      <span>应用修改</span>
+    </button>
+  </div>
+
+  <aside class="settings-stack">
+    <section class="panel">
+      <div class="user-meta" style="margin-bottom: 1.1rem;">
+        <span class="user-avatar">{{ (current_user.display_name or current_user.username or 'Z')[:2] }}</span>
+        <div class="user-copy">
+          <strong>{{ current_user.display_name or current_user.username }}</strong>
+          <span>@{{ current_user.username }}</span>
+        </div>
+      </div>
+      <div class="info-list">
+        <div class="info-item">
+          <dt>角色</dt>
+          <dd>Super Administrator</dd>
+        </div>
+        <div class="info-item">
+          <dt>登录保护</dt>
+          <dd>单用户会话</dd>
+        </div>
+        <div class="info-item">
+          <dt>适用环境</dt>
+          <dd>轻量云服务器</dd>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel-muted">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">安全姿态</h2>
+          <p class="section-subtitle">这些是首版当前明确依赖的保护点。</p>
+        </div>
+      </div>
+      <ul class="secure-list">
+        <li><span>登录保护已启用</span><strong>Enabled</strong></li>
+        <li><span>ZIP 路径穿越防护</span><strong>Enabled</strong></li>
+        <li><span>上传大小限制</span><strong>Enabled</strong></li>
+        <li><span>公网统一网关接入</span><strong>By Caddy</strong></li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">当前阈值感知</h2>
+          <p class="section-subtitle">这里只做轻量展示，不引入复杂监控系统。</p>
+        </div>
+      </div>
+      <div class="meter-list">
+        <div class="meter-item">
+          <div class="meter-head">
+            <span>上传包大小预算</span>
+            <strong>{{ (settings_items | selectattr('setting_key', 'equalto', 'max_package_upload_mb') | list | first).setting_value if settings_items else '150' }} MB</strong>
+          </div>
+          <div class="meter-track"><div class="meter-fill" style="width: 68%;"></div></div>
+        </div>
+        <div class="meter-item">
+          <div class="meter-head">
+            <span>历史保留周期</span>
+            <strong>{{ (settings_items | selectattr('setting_key', 'equalto', 'history_keep_days') | list | first).setting_value if settings_items else '365' }} 天</strong>
+          </div>
+          <div class="meter-track"><div class="meter-fill" style="width: 82%;"></div></div>
+        </div>
+      </div>
+    </section>
+  </aside>
+</form>
+{% endblock %}

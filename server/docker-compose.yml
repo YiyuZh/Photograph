@@ -1,0 +1,14 @@
+services:
+  app:
+    build:
+      context: .
+    container_name: photography-app
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:18120:8000"
+    volumes:
+      - ./storage:/app/storage
+      - ./logs:/app/logs
+      - ./knowledge:/app/knowledge
+    restart: unless-stopped

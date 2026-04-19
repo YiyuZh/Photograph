@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zhishe - Tasks</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config from Design System -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#eff4ff",
+                    "secondary-fixed": "#d8e2ff",
+                    "background": "#f8f9ff",
+                    "on-primary": "#ffffff",
+                    "on-primary-container": "#fefcff",
+                    "surface-bright": "#f8f9ff",
+                    "surface-container-highest": "#d5e3fc",
+                    "tertiary-container": "#c64f00",
+                    "primary-fixed-dim": "#adc6ff",
+                    "on-tertiary-container": "#fffbff",
+                    "surface-container": "#e6eeff",
+                    "tertiary": "#9e3d00",
+                    "outline-variant": "#c1c6d7",
+                    "on-secondary-fixed-variant": "#26467d",
+                    "on-primary-fixed": "#001a41",
+                    "primary-fixed": "#d8e2ff",
+                    "surface-container-high": "#dce9ff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-background": "#0d1c2e",
+                    "on-secondary-fixed": "#001a41",
+                    "on-tertiary-fixed-variant": "#7c2e00",
+                    "tertiary-fixed": "#ffdbcc",
+                    "primary-container": "#0070eb",
+                    "surface": "#f8f9ff",
+                    "inverse-primary": "#adc6ff",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#005bc1",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-surface-variant": "#414755",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#2d4c83",
+                    "on-tertiary-fixed": "#351000",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb595",
+                    "error-container": "#ffdad6",
+                    "inverse-surface": "#233144",
+                    "on-surface": "#0d1c2e",
+                    "on-tertiary": "#ffffff",
+                    "secondary": "#405e96",
+                    "surface-dim": "#ccdbf3",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#d5e3fc",
+                    "on-primary-fixed-variant": "#004493",
+                    "secondary-container": "#a1befd",
+                    "primary": "#0058bc",
+                    "outline": "#717786"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": [
+                            "Manrope"
+                    ],
+                    "body": [
+                            "Inter"
+                    ],
+                    "label": [
+                            "Inter"
+                    ]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        /* Base styles mapped to tokens */
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-surface');
+            font-family: theme('fontFamily.body');
+        }
+        
+        h1, h2, h3, h4, h5, h6, .font-headline {
+            font-family: theme('fontFamily.headline');
+        }
+        
+        /* Glass gradient for active states/CTAs */
+        .glass-gradient-primary {
+            background: linear-gradient(135deg, theme('colors.primary'), theme('colors.primary-container'));
+        }
+        
+        /* Ambient Shadows */
+        .shadow-ambient {
+            box-shadow: 0 8px 32px rgba(13, 28, 46, 0.06);
+        }
+        
+        /* Outline variant helper */
+        .border-outline-variant-20 {
+            border-color: rgba(193, 198, 215, 0.2);
+        }
+    </style>
+</head>
+<body class="flex min-h-screen bg-background font-body text-on-surface antialiased">
+<!-- SideNavBar (hidden md:flex) -->
+<nav class="hidden md:flex flex-col py-6 border-r border-[#c1c6d7]/10 bg-[#eff4ff] dark:bg-slate-900 fixed left-0 top-0 h-full w-64 z-20">
+<!-- Brand Header -->
+<div class="px-6 mb-8 flex items-center gap-3">
+<img alt="Zhishe Logo" class="w-8 h-8 rounded-lg object-cover" data-alt="Abstract geometric logo mark with precise blue lines and tech feel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlOa2mLiJOhgDnKeHcS3p28K938CqNYF3FpMZ00WxWnepBchwheBWOqSf4qcOL-yfs3LRv2sT6mwCbEQQ9k0JBPczdAow-ocrAGZuh-XbuUoNsaI116NQlMTGRA_Ym_c6iQN43ZWPnB5CCubK1BunFtK5tGDSoec8pXBly3wVfmTaUb2moWCB47TykPOI2k7wXDElSyQTQCrp69ZwU7lC8tNM0R85viKQFqu8YwmP2SAQSRzj345ExcJ1CuNSTS_D1LQ9IAQUQFGmQ"/>
+<div>
+<h1 class="font-manrope font-black text-2xl text-[#0058bc] dark:text-blue-300">Zhishe</h1>
+<p class="font-label text-xs text-on-surface-variant font-medium">Precision Lens</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<ul class="flex flex-col gap-1 px-2 flex-grow font-manrope text-sm font-medium">
+<!-- Home -->
+<li>
+<a class="text-slate-600 dark:text-slate-400 mx-2 px-4 py-3 flex items-center gap-3 hover:bg-white/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home" data-weight="fill" style="font-variation-settings: 'FILL' 1;">home</span>
+                    Home
+                </a>
+</li>
+<!-- Tasks (Active) -->
+<li>
+<a class="bg-[#ffffff] dark:bg-slate-800 text-[#0058bc] dark:text-blue-300 rounded-lg shadow-sm font-bold mx-2 px-4 py-3 flex items-center gap-3 transition-transform duration-200 translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="analytics" data-weight="fill" style="font-variation-settings: 'FILL' 1;">analytics</span>
+                    Tasks
+                </a>
+</li>
+<!-- Knowledge Base -->
+<li>
+<a class="text-slate-600 dark:text-slate-400 mx-2 px-4 py-3 flex items-center gap-3 hover:bg-white/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-200 hover:bg-[#d5e3fc] dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+                    Knowledge Base
+                </a>
+</li>
+<!-- Settings -->
+<li>
+<a class="text-slate-600 dark:text-slate-400 mx-2 px-4 py-3 flex items-center gap-3 hover:bg-white/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-200 hover:bg-[#d5e3fc] dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+<!-- Bottom Section (User/Profile stub) -->
+<div class="px-6 mt-auto">
+<div class="flex items-center gap-3 p-3 rounded-lg border border-outline-variant-20 hover:bg-surface-container-lowest transition-colors cursor-pointer">
+<img alt="User" class="w-8 h-8 rounded-full" data-alt="Professional headshot of a person looking forward slightly smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjDtku09Mi4KqBdQ-DN3Jf-o5mMLPOjLx2FbQWj1_ODL35r892KI5AQbIHKmN0dQUgEITAZ8vgK6hGqdCXbrVOo_9Ethf0rVN6CrL5rsRcDKSdaQcXuETr932yfpB_6Y26F7TL0CM_cmn6wMW4jkT-EekmeEG7Wu5104EhCFonwH1vTv_AaNMJq66notn27mwJ9vE4DBWs5KzjkwGpvaEGtlqnL2X-rxsf6y8A2Afd6vOM2ZKv7S_0pEmHuvMRXtcwKtFZ8SP8NQnH"/>
+<div class="flex flex-col">
+<span class="font-body text-sm font-medium text-on-surface">Admin User</span>
+<span class="font-label text-xs text-on-surface-variant">admin@zhishe.ai</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar (Mobile only, Hidden on Desktop) -->
+<header class="md:hidden flex justify-between items-center h-16 px-8 w-full border-b border-[#c1c6d7]/20 bg-[#f8f9ff] dark:bg-slate-950 sticky top-0 z-20">
+<div class="font-manrope font-bold text-xl tracking-tighter text-[#0d1c2e] dark:text-slate-100">Zhishe</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-500 dark:text-slate-400 hover:text-[#0058bc] transition-colors p-2 hover:bg-[#eff4ff] dark:hover:bg-slate-800 rounded-lg">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-500 dark:text-slate-400 hover:text-[#0058bc] transition-colors p-2 hover:bg-[#eff4ff] dark:hover:bg-slate-800 rounded-lg">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<img alt="User Profile" class="w-8 h-8 rounded-full border border-outline-variant-20" data-alt="Professional headshot of a person looking forward slightly smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAKjkVPeW9cX-urSM82UVri4X96vSEfNf-brSyMKZOOA726BWFVt5pr_rRbBSmkL3upvj7TOjVfDPPvK9xJgu4zw7agsalQRnA8Skq4j5z9-dZP-4Xq8wnWJPdMofs2I-TpFNcAsIKpE6dYy_EBILlaPmgfi8yFvPTDaIwNhg19MTMN5d5IFvlsqq67AxBcud-kW79ffWwVfQ2tSocQhyhMdyTxtzH1bPjIVcXsXfWqN2IzN099CRZNk7frsRKg2oDE6eAE6Puh6XV"/>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 p-6 md:p-10 flex flex-col gap-8 max-w-7xl mx-auto w-full">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="font-headline text-3xl font-bold text-on-surface tracking-tight">Tasks</h1>
+<p class="font-body text-sm text-on-surface-variant mt-1">Manage and monitor AI video analysis workloads.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-xl border border-outline-variant-20 bg-surface-container-lowest text-on-surface font-body text-sm font-medium hover:bg-surface-container-low transition-colors shadow-ambient">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+                        Export
+                    </button>
+<button class="flex items-center gap-2 px-5 py-2 rounded-xl glass-gradient-primary text-on-primary font-body text-sm font-medium hover:opacity-90 transition-opacity shadow-ambient">
+<span class="material-symbols-outlined text-lg" data-icon="add" data-weight="fill" style="font-variation-settings: 'FILL' 1;">add</span>
+                        New Task
+                    </button>
+</div>
+</div>
+<!-- Filter & Search Bar (Glassy floating feel) -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-ambient border border-outline-variant-20 flex flex-col md:flex-row gap-4 items-center justify-between">
+<!-- Search -->
+<div class="relative w-full md:w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-surface rounded-lg border border-outline-variant-20 focus:border-primary focus:ring-1 focus:ring-primary/10 transition-all font-body text-sm text-on-surface placeholder:text-on-surface-variant/70" placeholder="Search by title or filename..." type="text"/>
+</div>
+<!-- Filters -->
+<div class="flex w-full md:w-auto gap-3 overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
+<div class="flex items-center gap-2 min-w-max">
+<span class="font-label text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Type:</span>
+<select class="bg-surface border border-outline-variant-20 text-on-surface text-sm rounded-lg py-2 pl-3 pr-8 focus:border-primary focus:ring-0 appearance-none font-body">
+<option>All Types</option>
+<option>Object Detection</option>
+<option>Facial Recognition</option>
+<option>Activity Tracking</option>
+</select>
+</div>
+<div class="flex items-center gap-2 min-w-max">
+<span class="font-label text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Status:</span>
+<select class="bg-surface border border-outline-variant-20 text-on-surface text-sm rounded-lg py-2 pl-3 pr-8 focus:border-primary focus:ring-0 appearance-none font-body">
+<option>All Statuses</option>
+<option>Processing</option>
+<option>Completed</option>
+<option>Failed</option>
+<option>Queued</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Data Table Container -->
+<div class="bg-surface-container-lowest rounded-xl shadow-ambient border border-outline-variant-20 overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="font-label text-xs font-semibold text-on-surface-variant uppercase tracking-wider py-4 px-6 border-b border-outline-variant-20 w-1/4">Title</th>
+<th class="font-label text-xs font-semibold text-on-surface-variant uppercase tracking-wider py-4 px-6 border-b border-outline-variant-20">Type</th>
+<th class="font-label text-xs font-semibold text-on-surface-variant uppercase tracking-wider py-4 px-6 border-b border-outline-variant-20 hidden md:table-cell">Original Filename</th>
+<th class="font-label text-xs font-semibold text-on-surface-variant uppercase tracking-wider py-4 px-6 border-b border-outline-variant-20">Status</th>
+<th class="font-label text-xs font-semibold text-on-surface-variant uppercase tracking-wider py-4 px-6 border-b border-outline-variant-20 hidden lg:table-cell">Creation Date</th>
+<th class="font-label text-xs font-semibold text-on-surface-variant uppercase tracking-wider py-4 px-6 border-b border-outline-variant-20 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant-20 font-body text-sm text-on-surface">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="videocam">videocam</span>
+</div>
+<div class="flex flex-col">
+<span class="font-medium text-on-surface line-clamp-1">Campus South Gate Monit...</span>
+<span class="text-xs text-on-surface-variant hidden md:inline">ID: TSK-8892</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">Object Detection</td>
+<td class="py-4 px-6 text-on-surface-variant hidden md:table-cell font-mono text-xs truncate max-w-[150px]" title="cam_south_1400_1500.mp4">cam_south_1400...mp4</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-surface-container-high text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                                        Processing (64%)
+                                    </span>
+</td>
+<td class="py-4 px-6 text-on-surface-variant hidden lg:table-cell">Oct 24, 2023 14:32</td>
+<td class="py-4 px-6 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" title="View Details">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/50 rounded-lg transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="face">face</span>
+</div>
+<div class="flex flex-col">
+<span class="font-medium text-on-surface line-clamp-1">Lobby Entry Audit</span>
+<span class="text-xs text-on-surface-variant hidden md:inline">ID: TSK-8891</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">Facial Recognition</td>
+<td class="py-4 px-6 text-on-surface-variant hidden md:table-cell font-mono text-xs truncate max-w-[150px]" title="lobby_main_morning.avi">lobby_main_mor...avi</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-[#e6f4ea] text-[#137333]">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle">check_circle</span>
+                                        Completed
+                                    </span>
+</td>
+<td class="py-4 px-6 text-on-surface-variant hidden lg:table-cell">Oct 24, 2023 09:15</td>
+<td class="py-4 px-6 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" title="View Details">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/50 rounded-lg transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="directions_run">directions_run</span>
+</div>
+<div class="flex flex-col">
+<span class="font-medium text-on-surface line-clamp-1">Warehouse Aisle 4 Night</span>
+<span class="text-xs text-on-surface-variant hidden md:inline">ID: TSK-8890</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">Activity Tracking</td>
+<td class="py-4 px-6 text-on-surface-variant hidden md:table-cell font-mono text-xs truncate max-w-[150px]" title="wh_a4_nightshift_clip1.mp4">wh_a4_nightshi...mp4</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-error-container/50 text-error">
+<span class="material-symbols-outlined text-[14px]" data-icon="error">error</span>
+                                        Failed
+                                    </span>
+</td>
+<td class="py-4 px-6 text-on-surface-variant hidden lg:table-cell">Oct 23, 2023 23:45</td>
+<td class="py-4 px-6 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" title="View Details">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/50 rounded-lg transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="videocam">videocam</span>
+</div>
+<div class="flex flex-col">
+<span class="font-medium text-on-surface line-clamp-1">Parking Lot C Overview</span>
+<span class="text-xs text-on-surface-variant hidden md:inline">ID: TSK-8889</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">Object Detection</td>
+<td class="py-4 px-6 text-on-surface-variant hidden md:table-cell font-mono text-xs truncate max-w-[150px]" title="pkg_c_full_day.mkv">pkg_c_full_day.mkv</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+                                        Queued
+                                    </span>
+</td>
+<td class="py-4 px-6 text-on-surface-variant hidden lg:table-cell">Oct 23, 2023 18:00</td>
+<td class="py-4 px-6 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" title="View Details">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/50 rounded-lg transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 border-t border-outline-variant-20 bg-surface-container-low/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+<span class="font-label text-xs text-on-surface-variant">Showing <strong class="text-on-surface font-medium">1</strong> to <strong class="text-on-surface font-medium">10</strong> of <strong class="text-on-surface font-medium">97</strong> results</span>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low disabled:opacity-50 disabled:cursor-not-allowed transition-colors" disabled="">
+<span class="material-symbols-outlined text-[20px]" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container text-primary font-medium text-sm flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded-lg text-on-surface-variant hover:bg-surface-container-low font-medium text-sm flex items-center justify-center transition-colors">2</button>
+<button class="w-8 h-8 rounded-lg text-on-surface-variant hover:bg-surface-container-low font-medium text-sm flex items-center justify-center transition-colors">3</button>
+<span class="text-on-surface-variant px-1">...</span>
+<button class="w-8 h-8 rounded-lg text-on-surface-variant hover:bg-surface-container-low font-medium text-sm flex items-center justify-center transition-colors">10</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

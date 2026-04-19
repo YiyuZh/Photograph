@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block title %}结果回填 - 智摄{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <span class="eyebrow">Result Backfill</span>
+    <h1>{{ task.title }} 的结果回填</h1>
+    <p>支持直接粘贴模型结果，也支持上传 `.txt` / `.md` 文件。保存后即可继续生成结构化报告。</p>
+  </div>
+  <div class="page-actions">
+    <a class="button button-secondary" href="/tasks/{{ task.id }}/prompt">回看 Prompt</a>
+    <a class="button button-secondary" href="/tasks/{{ task.id }}/report">查看报告页</a>
+  </div>
+</section>
+
+{% if error %}
+<div class="alert alert-error">{{ error }}</div>
+{% endif %}
+
+<section class="grid grid-2">
+  <article class="panel">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">粘贴 AI 输出</h2>
+        <p class="section-subtitle">适合直接把 ChatGPT / DeepSeek 的文本结果粘贴进来。</p>
+      </div>
+    </div>
+    <form class="form" method="post" enctype="multipart/form-data">
+      <label>
+        <span>来源模型</span>
+        <input type="text" name="source_model" placeholder="例如 ChatGPT / DeepSeek" />
+      </label>
+      <label>
+        <span>备注</span>
+        <input type="text" name="source_note" placeholder="例如 第一轮完整拆解 / 带补拍建议" />
+      </label>
+      <label>
+        <span>分析结果</span>
+        <textarea name="content_text" rows="18" placeholder="把模型输出结果直接粘贴到这里"></textarea>
+      </label>
+      <button class="button" type="submit">
+        <span class="material-symbols-outlined">save</span>
+        <span>保存结果</span>
+      </button>
+    </form>
+  </article>
+
+  <div class="stack">
+    <article class="panel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">上传结果文件</h2>
+          <p class="section-subtitle">适合你已经整理成 Markdown 或 TXT 的版本。</p>
+        </div>
+      </div>
+      <form class="form" method="post" enctype="multipart/form-data">
+        <label>
+          <span>来源模型</span>
+          <input type="text" name="source_model" placeholder="例如 ChatGPT / DeepSeek" />
+        </label>
+        <label>
+          <span>备注</span>
+          <input type="text" name="source_note" placeholder="例如 Markdown 结构化整理版" />
+        </label>
+        <label>
+          <span>结果文件</span>
+          <input type="file" name="result_file" accept=".txt,.md" />
+        </label>
+        <button class="button button-secondary" type="submit">
+          <span class="material-symbols-outlined">upload_file</span>
+          <span>上传并保存</span>
+        </button>
+      </form>
+    </article>
+
+    {% if prompt %}
+    <article class="panel panel-muted">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">建议回填结构</h2>
+          <p class="section-subtitle">把这个结构一起交给模型，能让报告整理更稳定。</p>
+        </div>
+      </div>
+      <pre class="code-block is-soft">{{ prompt.fillback_template_text }}</pre>
+    </article>
+    {% endif %}
+  </div>
+</section>
+
+{% if result %}
+<section class="panel">
+  <div class="section-header">
+    <div>
+      <h2 class="section-title">当前结果</h2>
+      <p class="section-subtitle">这里显示当前激活的那一份回填内容。</p>
+    </div>
+    <a class="button" href="/tasks/{{ task.id }}/report">去生成报告</a>
+  </div>
+  <div class="pills" style="margin-bottom: 1rem;">
+    <span class="badge">{{ result.source_model or '未标注模型' }}</span>
+    <span class="badge">{{ result.source_note or '无备注' }}</span>
+  </div>
+  <pre class="code-block">{{ result.content_text }}</pre>
+</section>
+{% endif %}
+
+<section class="panel">
+  <div class="section-header">
+    <div>
+      <h2 class="section-title">结果历史</h2>
+      <p class="section-subtitle">切换不同版本的结果，方便你比较不同模型或不同轮次。</p>
+    </div>
+  </div>
+  {% if result_history %}
+  <div class="history-list">
+    {% for item in result_history %}
+    <article class="history-item">
+      <div>
+        <strong>#{{ item.id }} {% if item.is_current %}· 当前{% endif %}</strong>
+        <p class="micro-copy">{{ item.source_model or '未标注模型' }}{% if item.source_note %} · {{ item.source_note }}{% endif %}</p>
+        <p class="micro-copy">{{ item.created_at.strftime('%Y-%m-%d %H:%M') if item.created_at else '-' }}</p>
+      </div>
+      {% if not item.is_current %}
+      <form class="inline-form" method="post" action="/tasks/{{ task.id }}/fillback/{{ item.id }}/current">
+        <button class="button button-secondary" type="submit">设为当前</button>
+      </form>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="muted">还没有结果历史。</p>
+  {% endif %}
+</section>
+{% endblock %}

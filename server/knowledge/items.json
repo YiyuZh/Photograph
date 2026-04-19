@@ -1,0 +1,30 @@
+[
+  {
+    "item_key": "reference_shot_rhythm",
+    "title": "参考视频拆解时先看镜头节奏",
+    "category": "reference",
+    "tags": ["reference", "剪辑", "节奏"],
+    "content_markdown": "先判断开头 3 秒是否建立主题，再观察镜头长度、转场密度和重复镜头。对于参考视频，先拆结构，再拆调色。"
+  },
+  {
+    "item_key": "reference_color_guess",
+    "title": "调色推测只输出倾向，不假装精确还原 LUT",
+    "category": "reference",
+    "tags": ["reference", "调色"],
+    "content_markdown": "报告中应优先输出色温倾向、对比度、高光压制、肤色处理与阴影饱和度判断，不要伪装成能精确识别作者 LUT。"
+  },
+  {
+    "item_key": "improve_edit_priority",
+    "title": "优化模式先给必须改，再给建议改",
+    "category": "improve",
+    "tags": ["improve", "剪辑", "优化"],
+    "content_markdown": "优化用户自己视频时，先识别节奏拖沓、镜头重复、信息断层等必须修改项，再补充建议改与可选优化。"
+  },
+  {
+    "item_key": "improve_color_consistency",
+    "title": "优化模式优先检查调色一致性",
+    "category": "improve",
+    "tags": ["improve", "调色"],
+    "content_markdown": "如果画面跨段落风格不统一，应优先提醒曝光、白平衡和肤色倾向是否一致，再讨论风格增强。"
+  }
+]

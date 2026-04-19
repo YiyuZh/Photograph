@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block title %}Prompt 工作台 - 智摄{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <span class="eyebrow">Prompt Workbench</span>
+    <h1>{{ task.title }} 的 Prompt</h1>
+    <p>模板化生成系统 Prompt，并把推荐素材、追问建议和回填模板集中到同一工作台。</p>
+  </div>
+  <div class="page-actions">
+    <form method="post" action="/tasks/{{ task.id }}/prompt/generate">
+      <button class="button" type="submit">
+        <span class="material-symbols-outlined">auto_awesome</span>
+        <span>生成 / 重生成 Prompt</span>
+      </button>
+    </form>
+    <a class="button button-secondary" href="/tasks/{{ task.id }}/fillback">去回填结果</a>
+  </div>
+</section>
+
+{% if prompt %}
+<section class="grid grid-sidebar">
+  <article class="panel">
+    <div class="code-toolbar">
+      <div>
+        <h2 class="section-title">当前系统 Prompt</h2>
+        <p class="section-subtitle">版本 V{{ prompt.version }}{% if prompt.template %} · 模板 {{ prompt.template.name }}{% endif %}</p>
+      </div>
+      <button class="button button-secondary" type="button" data-copy-target="prompt-text">复制全文</button>
+    </div>
+    <pre id="prompt-text" class="code-block">{{ prompt.prompt_text }}</pre>
+  </article>
+
+  <div class="stack">
+    <article class="panel">
+      <div class="code-toolbar">
+        <div>
+          <h2 class="section-title">推荐附带素材</h2>
+          <p class="section-subtitle">把这些素材一起喂给模型，能显著减少来回追问。</p>
+        </div>
+        <button class="button button-secondary" type="button" data-copy-target="materials-text">复制</button>
+      </div>
+      <pre id="materials-text" class="code-block is-soft">{{ prompt.materials_text }}</pre>
+    </article>
+
+    <article class="panel">
+      <div class="code-toolbar">
+        <div>
+          <h2 class="section-title">推荐追问</h2>
+          <p class="section-subtitle">适合在第一轮回答后继续追深一点的上下文问题。</p>
+        </div>
+        <button class="button button-secondary" type="button" data-copy-target="follow-up-text">复制</button>
+      </div>
+      <pre id="follow-up-text" class="code-block is-soft">{{ prompt.follow_up_text }}</pre>
+    </article>
+
+    <article class="panel panel-muted">
+      <div class="code-toolbar">
+        <div>
+          <h2 class="section-title">回填模板</h2>
+          <p class="section-subtitle">让模型输出更接近智摄首版报告结构。</p>
+        </div>
+        <button class="button button-secondary" type="button" data-copy-target="fillback-template-text">复制</button>
+      </div>
+      <pre id="fillback-template-text" class="code-block is-soft">{{ prompt.fillback_template_text }}</pre>
+    </article>
+  </div>
+</section>
+
+<section class="grid grid-2">
+  <article class="panel">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">工作流位置</h2>
+        <p class="section-subtitle">当前阶段已经来到 Prompt 生成，下一步通常是手动提交给模型并回填。</p>
+      </div>
+    </div>
+    <div class="pipeline" style="grid-template-columns: repeat(3, minmax(0, 1fr));">
+      <div class="pipeline-step is-complete">
+        <span class="step-dot">1</span>
+        <strong>导入分析包</strong>
+        <span>已完成</span>
+      </div>
+      <div class="pipeline-step is-active">
+        <span class="step-dot">2</span>
+        <strong>生成 Prompt</strong>
+        <span>当前阶段</span>
+      </div>
+      <div class="pipeline-step">
+        <span class="step-dot">3</span>
+        <strong>执行与回填</strong>
+        <span>下一步</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="panel">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Prompt 历史版本</h2>
+        <p class="section-subtitle">支持重复生成新版本，并在版本间切换。</p>
+      </div>
+    </div>
+    <div class="history-list">
+      {% for item in prompt_history %}
+      <article class="history-item">
+        <div>
+          <strong>V{{ item.version }} {% if item.is_current %}· 当前{% endif %}</strong>
+          <p class="micro-copy">{{ item.template.name if item.template else '未绑定模板' }}</p>
+          <p class="micro-copy">{{ item.created_at }}</p>
+        </div>
+        {% if not item.is_current %}
+        <form class="inline-form" method="post" action="/tasks/{{ task.id }}/prompt/{{ item.id }}/current">
+          <button class="button button-secondary" type="submit">设为当前</button>
+        </form>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </article>
+</section>
+{% else %}
+<section class="panel">
+  <div class="empty-state">
+    <span class="material-symbols-outlined">psychology</span>
+    <strong>当前还没有 Prompt</strong>
+    <p class="muted">请先确认分析包已上传，再点击上方按钮生成 Prompt。</p>
+  </div>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.querySelectorAll("[data-copy-target]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const target = document.getElementById(button.dataset.copyTarget);
+      if (!target) return;
+      const originalText = button.innerText;
+      try {
+        await navigator.clipboard.writeText(target.innerText);
+        button.innerText = "已复制";
+      } catch (error) {
+        button.innerText = "复制失败";
+      }
+      setTimeout(() => {
+        button.innerText = originalText;
+      }, 1400);
+    });
+  });
+</script>
+{% endblock %}

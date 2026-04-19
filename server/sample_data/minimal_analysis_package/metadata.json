@@ -1,0 +1,9 @@
+{
+  "file_name": "sample_reference_video.mp4",
+  "duration_sec": 18.4,
+  "resolution": "1080x1920",
+  "fps": 30,
+  "bitrate_kbps": 4200,
+  "frame_count": 6,
+  "segment_count": 3
+}

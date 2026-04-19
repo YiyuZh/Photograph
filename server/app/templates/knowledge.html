@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% block title %}知识库 - 智摄{% endblock %}
+{% block content %}
+{% set featured_item = items[0] if items else None %}
+{% set regular_items = items[1:] if items|length > 1 else [] %}
+
+<section class="page-header">
+  <div>
+    <span class="eyebrow">Knowledge Base</span>
+    <h1>知识库</h1>
+    <p>集中管理镜头拆解、调色、剪辑、风格识别和 AI 分析方法，作为 Prompt 生成时的长期知识底座。</p>
+  </div>
+</section>
+
+{% if items %}
+<section class="workspace-grid">
+  <aside class="panel panel-muted filter-panel">
+    <form class="form" method="get">
+      <label>
+        <span>搜索知识条目</span>
+        <input type="text" name="q" value="{{ filters.q }}" placeholder="例如 color grading / 节奏 / 构图" />
+      </label>
+      <label>
+        <span>分类筛选</span>
+        <select name="category">
+          <option value="">全部分类</option>
+          {% for item in categories %}
+          <option value="{{ item }}" {% if filters.category == item %}selected{% endif %}>{{ item }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <button class="button button-secondary" type="submit">
+        <span class="material-symbols-outlined">search</span>
+        <span>应用筛选</span>
+      </button>
+    </form>
+
+    <div class="filter-group">
+      <h3>Categories</h3>
+      <div class="filter-list">
+        <a class="filter-item {% if not filters.category %}is-active{% endif %}" href="/knowledge">
+          <span>All Topics</span>
+          <span class="filter-count">{{ knowledge_total }}</span>
+        </a>
+        {% for item in categories %}
+        <a class="filter-item {% if filters.category == item %}is-active{% endif %}" href="/knowledge?category={{ item }}">
+          <span>{{ item }}</span>
+          <span class="filter-count">{{ category_counts.get(item, 0) }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% if popular_tags %}
+    <div class="filter-group">
+      <h3>Tags</h3>
+      <div class="tag-list">
+        {% for tag, count in popular_tags %}
+        <a class="tag" href="/knowledge?q={{ tag }}">#{{ tag }} · {{ count }}</a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </aside>
+
+  <div class="stack">
+    {% if featured_item %}
+    <article class="panel featured-knowledge">
+      <div class="featured-knowledge-media">
+        <div style="padding: 1.15rem;">
+          <div class="eyebrow-row" style="color: rgba(234, 241, 255, 0.9);">
+            <span class="badge" style="background: rgba(173, 198, 255, 0.2); color: #d8e2ff;">Featured</span>
+          </div>
+          <pre class="code-block" style="margin-top: 1rem; min-height: 13rem;">{{ featured_item.content_markdown[:320] }}</pre>
+        </div>
+      </div>
+      <div class="featured-knowledge-body">
+        <div class="eyebrow-row">
+          <span>{{ featured_item.category }}</span>
+          <span>{{ (featured_item.content_markdown|length // 220) + 1 }} min read</span>
+        </div>
+        <h2><a href="/knowledge/{{ featured_item.id }}">{{ featured_item.title }}</a></h2>
+        <p>{{ featured_item.content_markdown[:220] }}{% if featured_item.content_markdown|length > 220 %}...{% endif %}</p>
+        <div class="tag-list">
+          {% for tag in featured_item.tags[:4] %}
+          <span class="tag">#{{ tag }}</span>
+          {% endfor %}
+        </div>
+        <div class="task-card-actions">
+          <a class="button button-secondary" href="/knowledge/{{ featured_item.id }}">阅读全文</a>
+        </div>
+      </div>
+    </article>
+    {% endif %}
+
+    {% if regular_items %}
+    <div class="knowledge-grid">
+      {% for item in regular_items %}
+      <article class="knowledge-card">
+        <div class="eyebrow-row">
+          <span>{{ item.category }}</span>
+          <span>{{ (item.content_markdown|length // 240) + 1 }} min read</span>
+        </div>
+        <h2><a href="/knowledge/{{ item.id }}">{{ item.title }}</a></h2>
+        <p>{{ item.content_markdown[:150] }}{% if item.content_markdown|length > 150 %}...{% endif %}</p>
+        <div class="tag-list">
+          {% for tag in item.tags[:3] %}
+          <span class="tag">#{{ tag }}</span>
+          {% endfor %}
+        </div>
+        <a class="button button-secondary" href="/knowledge/{{ item.id }}">查看详情</a>
+      </article>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% else %}
+<section class="empty-spotlight">
+  <div class="empty-spotlight-card">
+    <div class="empty-spotlight-visual">
+      <span class="material-symbols-outlined">library_books</span>
+      <span class="floating-chip is-top"><span class="material-symbols-outlined" style="font-size: 1rem;">search</span></span>
+      <span class="floating-chip is-bottom"><span class="material-symbols-outlined" style="font-size: 1rem;">data_object</span></span>
+    </div>
+    <h2 style="font-size: 2rem;">没有匹配的知识条目</h2>
+    <p class="page-copy">可以换一个关键词，或者先取消分类筛选再试一次。</p>
+    <div class="task-card-actions" style="justify-content: center; margin-top: 1rem;">
+      <a class="button button-secondary" href="/knowledge">清空筛选</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

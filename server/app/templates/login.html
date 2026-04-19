@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}登录 - 智摄{% endblock %}
+{% block content %}
+<section class="panel auth-panel">
+  <div class="auth-card-top">
+    <span class="auth-logo">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">view_in_ar</span>
+    </span>
+    <div style="text-align: center;">
+      <h1 style="font-size: 2.3rem;">智摄</h1>
+      <p class="page-copy" style="margin-top: 0.45rem;">AI 视频分析工作流系统</p>
+    </div>
+  </div>
+
+  <div class="auth-card-body">
+    {% if error %}
+    <div class="alert alert-error">{{ error }}</div>
+    {% endif %}
+
+    <form class="form" method="post" action="/login">
+      <label>
+        <span>用户名</span>
+        <input type="text" name="username" placeholder="请输入管理员用户名" required />
+      </label>
+      <label>
+        <span>密码</span>
+        <input type="password" name="password" placeholder="请输入密码" required />
+      </label>
+      <button type="submit" class="button" style="width: 100%;">
+        <span class="material-symbols-outlined">login</span>
+        <span>登录工作台</span>
+      </button>
+    </form>
+  </div>
+
+  <div class="auth-card-footer">
+    当前版本仅开放单用户登录保护，适合个人工作流和轻量服务器部署。
+  </div>
+</section>
+{% endblock %}

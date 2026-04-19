@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+{% from "partials/ui.html" import status_badge, task_type_badge %}
+{% block title %}任务详情 - 智摄{% endblock %}
+{% block content %}
+{% set current_stage = 0 %}
+{% if task.status == 'package_uploaded' %}
+  {% set current_stage = 1 %}
+{% elif task.status == 'prompt_generated' %}
+  {% set current_stage = 2 %}
+{% elif task.status == 'result_filled' %}
+  {% set current_stage = 3 %}
+{% elif task.status == 'report_ready' %}
+  {% set current_stage = 4 %}
+{% endif %}
+
+<section class="page-header">
+  <div>
+    <div class="eyebrow-row" style="margin-bottom: 0.75rem;">
+      <a href="/tasks">Workbench</a>
+      <span>/</span>
+      <span>Task #{{ task.id }}</span>
+    </div>
+    <h1>{{ task.title }}</h1>
+    <div class="pills" style="margin-top: 0.9rem;">
+      {{ task_type_badge(task.task_type) }}
+      {{ status_badge(task.status) }}
+    </div>
+    <p class="page-copy">{{ task.description or '还没有填写任务说明，可以在下面直接继续补充。' }}</p>
+  </div>
+  <div class="page-actions">
+    <a class="button button-secondary" href="/tasks/{{ task.id }}/prompt">Prompt</a>
+    <a class="button button-secondary" href="/tasks/{{ task.id }}/fillback">回填</a>
+    <a class="button button-secondary" href="/tasks/{{ task.id }}/report">报告</a>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="pipeline">
+    <div class="pipeline-step {% if current_stage >= 0 %}is-complete{% endif %}">
+      <span class="step-dot">{% if current_stage >= 0 %}<span class="material-symbols-outlined" style="font-size: 0.95rem;">check</span>{% else %}1{% endif %}</span>
+      <strong>Created</strong>
+      <span>任务已登记</span>
+    </div>
+    <div class="pipeline-step {% if current_stage > 1 %}is-complete{% elif current_stage == 1 %}is-active{% endif %}">
+      <span class="step-dot">{% if current_stage > 1 %}<span class="material-symbols-outlined" style="font-size: 0.95rem;">check</span>{% else %}2{% endif %}</span>
+      <strong>Uploaded</strong>
+      <span>分析包导入</span>
+    </div>
+    <div class="pipeline-step {% if current_stage > 2 %}is-complete{% elif current_stage == 2 %}is-active{% endif %}">
+      <span class="step-dot">{% if current_stage > 2 %}<span class="material-symbols-outlined" style="font-size: 0.95rem;">check</span>{% else %}3{% endif %}</span>
+      <strong>Prompt Gen</strong>
+      <span>Prompt 工作台</span>
+    </div>
+    <div class="pipeline-step {% if current_stage > 3 %}is-complete{% elif current_stage == 3 %}is-active{% endif %}">
+      <span class="step-dot">{% if current_stage > 3 %}<span class="material-symbols-outlined" style="font-size: 0.95rem;">check</span>{% else %}{% if current_stage == 3 %}<span class="material-symbols-outlined" style="font-size: 0.95rem;">sync</span>{% else %}4{% endif %}{% endif %}</span>
+      <strong>Result Backfilled</strong>
+      <span>结果已回填</span>
+    </div>
+    <div class="pipeline-step {% if current_stage == 4 %}is-active{% endif %}">
+      <span class="step-dot">{% if current_stage == 4 %}<span class="material-symbols-outlined" style="font-size: 0.95rem;">description</span>{% else %}5{% endif %}</span>
+      <strong>Report Gen</strong>
+      <span>报告生成</span>
+    </div>
+  </div>
+</section>
+
+<section class="workspace-grid">
+  <div class="stack">
+    <article class="panel panel-muted">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">分析包摘要</h2>
+          <p class="section-subtitle">当前任务的基础输入信息会集中在这里。</p>
+        </div>
+        <form method="post" action="/tasks/{{ task.id }}/package" enctype="multipart/form-data">
+          <label class="button button-secondary" style="cursor: pointer;">
+            <span class="material-symbols-outlined">upload_file</span>
+            <span>上传 / 替换 ZIP</span>
+            <input type="file" name="package_file" accept=".zip" required hidden onchange="this.form.submit()" />
+          </label>
+        </form>
+      </div>
+
+      {% if package %}
+      <div class="summary-grid">
+        <article class="summary-card">
+          <span class="stat-label">源文件</span>
+          <strong style="font-size: 1rem; line-height: 1.45;">{{ package.video_name or task.source_video_name or '待识别' }}</strong>
+        </article>
+        <article class="summary-card">
+          <span class="stat-label">分辨率</span>
+          <strong style="font-size: 1rem;">{{ package.resolution or '-' }}</strong>
+        </article>
+        <article class="summary-card">
+          <span class="stat-label">时长</span>
+          <strong>{{ package.duration_sec or '-' }}</strong>
+        </article>
+        <article class="summary-card">
+          <span class="stat-label">关键帧数</span>
+          <strong>{{ package.frame_count or '-' }}</strong>
+        </article>
+      </div>
+      {% else %}
+      <div class="empty-state">
+        <span class="material-symbols-outlined">upload</span>
+        <strong>当前任务还没有分析包</strong>
+        <p class="muted">先导入 ZIP，系统才能解析 metadata、segments、关键帧和联系表。</p>
+      </div>
+      {% endif %}
+    </article>
+
+    {% if prompt %}
+    <article class="panel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">当前 Prompt 预览</h2>
+          <p class="section-subtitle">这里截取当前 Prompt 的开头，方便你确认本轮分析目标。</p>
+        </div>
+        <a class="button button-secondary" href="/tasks/{{ task.id }}/prompt">打开工作台</a>
+      </div>
+      <div class="prompt-preview">
+        <p>{{ prompt.prompt_text[:420] }}{% if prompt.prompt_text|length > 420 %}...{% endif %}</p>
+      </div>
+    </article>
+    {% endif %}
+
+    {% if package %}
+    <article class="panel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">片段摘要</h2>
+          <p class="section-subtitle">优先显示前 12 个片段，帮助你快速建立镜头级理解。</p>
+        </div>
+      </div>
+      {% if segments %}
+      <div class="segment-grid">
+        {% for segment in segments %}
+        <article class="segment-card">
+          {% if segment.keyframe_path %}
+          <img class="segment-image" src="/files/{{ segment.keyframe_path }}" alt="segment keyframe" />
+          {% endif %}
+          <div class="pills">
+            <span class="badge">片段 {{ segment.segment_index }}</span>
+            <span class="badge">{{ segment.start_sec or 0 }}s - {{ segment.end_sec or 0 }}s</span>
+          </div>
+          <h3>{{ segment.title or '未命名片段' }}</h3>
+          <p>{{ segment.summary or '当前片段没有摘要说明。' }}</p>
+        </article>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="empty-state">
+        <span class="material-symbols-outlined">splitscreen</span>
+        <strong>没有 segments 数据</strong>
+        <p class="muted">仍然可以基于 metadata、关键帧和 transcript 继续生成 Prompt。</p>
+      </div>
+      {% endif %}
+    </article>
+
+    <article class="panel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">文件索引</h2>
+          <p class="section-subtitle">确认分析包里实际被识别到的文件集合。</p>
+        </div>
+      </div>
+      {% if package_files %}
+      <ul class="simple-list">
+        {% for item in package_files %}
+        <li><strong>{{ item.relative_path }}</strong><br /><span class="micro-copy">{{ item.file_type }}</span></li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="muted">暂无文件索引。</p>
+      {% endif %}
+    </article>
+    {% endif %}
+  </div>
+
+  <aside class="stack">
+    <article class="panel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">版本历史</h2>
+          <p class="section-subtitle">把 Prompt、回填结果和报告的版本都放到右侧统一查看。</p>
+        </div>
+      </div>
+      <div class="history-panel">
+        {% for item in prompt_history[:2] %}
+        <article class="history-item">
+          <div>
+            <strong>Prompt V{{ item.version }} {% if item.is_current %}· 当前{% endif %}</strong>
+            <p class="micro-copy">{{ item.template.name if item.template else '未绑定模板' }}</p>
+          </div>
+          {% if not item.is_current %}
+          <form class="inline-form" method="post" action="/tasks/{{ task.id }}/prompt/{{ item.id }}/current">
+            <button class="button button-secondary" type="submit">切换</button>
+          </form>
+          {% endif %}
+        </article>
+        {% endfor %}
+
+        {% for item in result_history[:2] %}
+        <article class="history-item">
+          <div>
+            <strong>结果 #{{ item.id }} {% if item.is_current %}· 当前{% endif %}</strong>
+            <p class="micro-copy">{{ item.source_model or '未标注模型' }}</p>
+          </div>
+        </article>
+        {% endfor %}
+
+        {% for item in report_history[:2] %}
+        <article class="history-item">
+          <div>
+            <strong>报告 V{{ item.version }} {% if item.is_current %}· 当前{% endif %}</strong>
+            <p class="micro-copy">{{ item.created_at.strftime('%Y-%m-%d %H:%M') if item.created_at else '-' }}</p>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </article>
+
+    <article class="panel panel-muted">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">任务操作</h2>
+          <p class="section-subtitle">基础编辑和删除动作集中在右侧，避免打断分析视线。</p>
+        </div>
+      </div>
+      <form class="form" method="post" action="/tasks/{{ task.id }}/edit">
+        <label>
+          <span>任务标题</span>
+          <input type="text" name="title" value="{{ task.title }}" required />
+        </label>
+        <label>
+          <span>任务说明</span>
+          <textarea name="description" rows="5">{{ task.description or '' }}</textarea>
+        </label>
+        <button type="submit" class="button button-secondary">
+          <span class="material-symbols-outlined">save</span>
+          <span>保存修改</span>
+        </button>
+      </form>
+      <form method="post" action="/tasks/{{ task.id }}/delete" onsubmit="return confirm('确认删除这个任务吗？');">
+        <button class="button button-danger" type="submit" style="width: 100%;">
+          <span class="material-symbols-outlined">delete</span>
+          <span>删除任务</span>
+        </button>
+      </form>
+    </article>
+
+    <article class="panel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">链路建议</h2>
+          <p class="section-subtitle">根据当前状态给你一个最短下一步。</p>
+        </div>
+      </div>
+      <ul class="simple-list">
+        {% if not package %}
+        <li>先上传分析包 ZIP，后续 Prompt 才有真实上下文可用。</li>
+        {% elif not prompt %}
+        <li>分析包已经就绪，下一步最适合进入 Prompt 工作台生成第一版 Prompt。</li>
+        {% elif not result %}
+        <li>Prompt 已经生成，建议把它提交给模型后回到回填页粘贴结果。</li>
+        {% elif not report %}
+        <li>结果已经保存，现在可以直接生成结构化报告并导出。</li>
+        {% else %}
+        <li>主链路已经闭环，建议回看历史版本并决定是否生成下一轮 Prompt。</li>
+        {% endif %}
+      </ul>
+    </article>
+  </aside>
+</section>
+{% endblock %}

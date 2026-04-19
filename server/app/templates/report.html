@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}报告 - 智摄{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <span class="eyebrow">Final Report</span>
+    <h1>{{ task.title }} 的报告</h1>
+    <p>首版报告优先保留原始分析内容，再按固定结构整理成适合复盘和归档的结果页。</p>
+  </div>
+  <div class="page-actions">
+    <form method="post" action="/tasks/{{ task.id }}/report/generate">
+      <button class="button" type="submit">
+        <span class="material-symbols-outlined">description</span>
+        <span>生成 / 重生成报告</span>
+      </button>
+    </form>
+  </div>
+</section>
+
+{% if report and report_payload %}
+<section class="panel">
+  <div class="section-header">
+    <div>
+      <h2 class="section-title">{{ report.title }}</h2>
+      <p class="section-subtitle">版本 V{{ report.version }}{% if report.is_current %} · 当前版本{% endif %}</p>
+    </div>
+    <div class="actions">
+      <a class="button button-secondary" href="/reports/{{ report.id }}/download/markdown">导出 Markdown</a>
+      <a class="button button-secondary" href="/reports/{{ report.id }}/download/txt">导出 TXT</a>
+    </div>
+  </div>
+  <div class="report-section">
+    <div class="callout">
+      <strong>总体结论</strong>
+      <p>{{ report_payload.summary }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="grid grid-2">
+  {% for section in report_payload.sections %}
+  <article class="panel">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">{{ section.title }}</h2>
+      </div>
+    </div>
+    <div class="report-section">
+      <p class="pre-wrap">{{ section.content }}</p>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+
+<section class="panel">
+  <div class="section-header">
+    <div>
+      <h2 class="section-title">原始分析内容</h2>
+      <p class="section-subtitle">保留模型原文，便于后续人工复核和二次整理。</p>
+    </div>
+  </div>
+  <pre class="code-block">{{ report_payload.raw_content }}</pre>
+</section>
+
+<section class="panel">
+  <div class="section-header">
+    <div>
+      <h2 class="section-title">报告历史</h2>
+      <p class="section-subtitle">支持切回旧版报告，避免新版本覆盖旧结论。</p>
+    </div>
+  </div>
+  <div class="history-list">
+    {% for item in report_history %}
+    <article class="history-item">
+      <div>
+        <strong>V{{ item.version }} {% if item.is_current %}· 当前{% endif %}</strong>
+        <p class="micro-copy">{{ item.summary or '没有摘要' }}</p>
+        <p class="micro-copy">{{ item.created_at.strftime('%Y-%m-%d %H:%M') if item.created_at else '-' }}</p>
+      </div>
+      {% if not item.is_current %}
+      <form class="inline-form" method="post" action="/tasks/{{ task.id }}/report/{{ item.id }}/current">
+        <button class="button button-secondary" type="submit">设为当前</button>
+      </form>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% else %}
+<section class="panel">
+  <div class="empty-state">
+    <span class="material-symbols-outlined">article</span>
+    <strong>当前还没有报告</strong>
+    <p class="muted">请先完成结果回填，再生成结构化报告。</p>
+    <a class="button button-secondary" href="/tasks/{{ task.id }}/fillback">去回填结果</a>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

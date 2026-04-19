@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Task Details - Zhishe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#d8e2ff",
+                        "inverse-primary": "#adc6ff",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffdbcc",
+                        "secondary-container": "#a1befd",
+                        "surface-container": "#e6eeff",
+                        "on-surface-variant": "#414755",
+                        "primary": "#0058bc",
+                        "outline-variant": "#c1c6d7",
+                        "tertiary": "#9e3d00",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-high": "#dce9ff",
+                        "on-tertiary-fixed": "#351000",
+                        "on-primary-container": "#fefcff",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-secondary-fixed": "#001a41",
+                        "primary-fixed": "#d8e2ff",
+                        "surface-container-highest": "#d5e3fc",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb595",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-secondary-container": "#2d4c83",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#004493",
+                        "outline": "#717786",
+                        "error": "#ba1a1a",
+                        "background": "#f8f9ff",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#c64f00",
+                        "on-tertiary-fixed-variant": "#7c2e00",
+                        "on-primary-fixed": "#001a41",
+                        "inverse-surface": "#233144",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-tint": "#005bc1",
+                        "surface": "#f8f9ff",
+                        "on-tertiary-container": "#fffbff",
+                        "on-background": "#0d1c2e",
+                        "primary-container": "#0070eb",
+                        "surface-container-low": "#eff4ff",
+                        "secondary": "#405e96",
+                        "surface-dim": "#ccdbf3",
+                        "on-surface": "#0d1c2e",
+                        "on-secondary-fixed-variant": "#26467d",
+                        "surface-variant": "#d5e3fc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #0058bc, #0070eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #0058bc, #0070eb);
+            color: #ffffff;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+        .card-shadow {
+            box-shadow: 0 4px 24px rgba(13, 28, 46, 0.04);
+        }
+        .ambient-shadow {
+            box-shadow: 0 12px 48px rgba(13, 28, 46, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased min-h-screen flex flex-col md:flex-row">
+<!-- SideNavBar (Web) -->
+<nav class="hidden md:flex flex-col gap-2 p-4 fixed left-0 top-0 h-full w-64 border-r border-outline-variant/20 bg-surface-container-low z-50">
+<div class="mb-8 px-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl">lens_blur</span>
+</div>
+<div>
+<h1 class="font-headline font-black text-primary text-xl tracking-tight">Zhishe</h1>
+<p class="font-label text-xs text-on-surface-variant">Video Analysis</p>
+</div>
+</div>
+<div class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg font-body text-[0.8125rem] font-medium transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[1.25rem]">grid_view</span>
+                Home
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-[#0058bc] text-white rounded-lg shadow-lg shadow-blue-500/20 font-body text-[0.8125rem] font-medium transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[1.25rem]">assignment_turned_in</span>
+                Tasks
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg font-body text-[0.8125rem] font-medium transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[1.25rem]">auto_stories</span>
+                Knowledge Base
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg font-body text-[0.8125rem] font-medium transition-all duration-300 mt-auto" href="#">
+<span class="material-symbols-outlined text-[1.25rem]">settings</span>
+                Settings
+            </a>
+</div>
+<button class="btn-primary w-full py-3 mt-4 flex items-center justify-center gap-2 font-body text-sm font-medium">
+<span class="material-symbols-outlined text-sm">add</span>
+            New Analysis
+        </button>
+</nav>
+<!-- TopNavBar (Mobile) -->
+<header class="md:hidden flex items-center justify-between px-6 h-16 w-full fixed top-0 z-40 border-b border-slate-200/20 bg-white/80 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(13,28,46,0.04)]">
+<h1 class="text-xl font-bold tracking-tighter text-[#0058bc] font-headline">Zhishe</h1>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-500">notifications</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden">
+<img alt="Photographer Profile" class="w-full h-full object-cover" data-alt="professional headshot of a person looking forward with neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqFXJaQOSzc49cCVm3yvI7GjZdeH6V6oo5jzV5_KHOd8zbGX_rHcuz_zWGCIrQiVasucYx2f8i4s7WfI8sX2szCWdHLao9XEn3By-YXoU4mU-M7ORTyCzT74c56E6yGVWW1Mo0pgd7uuiqvQbFwvW46_EyoVoMNuRFa1UojxLiAHRYnDaUth37FmQiY7vOgt6T7sjJSrMPLwgjrqAIy8LA916vVkJ816RQ8bwNQV14Pmi36FdPyHT7R8iSvEb_gvb6QJ6GSQjVZf_d"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 pt-16 md:pt-0 min-h-screen bg-surface p-6 md:p-8 lg:p-12 overflow-y-auto">
+<!-- Header Section -->
+<div class="max-w-6xl mx-auto mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<div class="flex items-center gap-2 text-sm text-on-surface-variant font-label mb-2">
+<a class="hover:text-primary transition-colors" href="#">Tasks</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="font-medium text-on-surface">Analysis #892-A</span>
+</div>
+<h2 class="font-headline text-3xl md:text-4xl font-bold text-on-surface tracking-tight mb-2">Drone Footage Survey</h2>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary font-label text-xs font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                        Processing
+                    </span>
+<span class="text-sm font-label text-on-surface-variant">Last updated 12 mins ago</span>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="px-5 py-2.5 rounded-xl border border-outline-variant/30 text-on-surface font-body text-sm font-medium hover:bg-surface-container-low transition-colors flex items-center gap-2 bg-surface-container-lowest">
+<span class="material-symbols-outlined text-[1.25rem]">download</span>
+                    Export Data
+                </button>
+<button class="btn-primary px-6 py-2.5 flex items-center gap-2 font-body text-sm font-medium">
+                    Generate Prompt
+                    <span class="material-symbols-outlined text-[1.25rem]">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Tracker & Details (7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-8">
+<!-- Progress Tracker -->
+<section class="bg-surface-container-lowest rounded-xl p-8 card-shadow relative overflow-hidden">
+<h3 class="font-headline text-lg font-semibold mb-8 text-on-surface">Analysis Pipeline</h3>
+<div class="relative flex justify-between items-center z-10">
+<!-- Connecting Line Background -->
+<div class="absolute top-1/2 left-0 w-full h-[2px] bg-surface-variant -z-10 -translate-y-1/2 border-t-2 border-dashed border-outline-variant/30"></div>
+<!-- Active Line -->
+<div class="absolute top-1/2 left-0 w-1/2 h-[2px] bg-primary -z-10 -translate-y-1/2"></div>
+<!-- Step 1 -->
+<div class="flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<span class="font-label text-xs font-medium text-on-surface">Create</span>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm">cloud_upload</span>
+</div>
+<span class="font-label text-xs font-medium text-on-surface">Upload</span>
+</div>
+<!-- Step 3 (Active) -->
+<div class="flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-lowest border-2 border-primary text-primary flex items-center justify-center shadow-lg shadow-primary/10 relative">
+<div class="absolute inset-0 rounded-full bg-primary/10 animate-ping"></div>
+<span class="material-symbols-outlined text-sm">psychology</span>
+</div>
+<span class="font-label text-xs font-bold text-primary">Prompt</span>
+</div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">data_object</span>
+</div>
+<span class="font-label text-xs font-medium text-on-surface-variant">Result</span>
+</div>
+<!-- Step 5 -->
+<div class="flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">summarize</span>
+</div>
+<span class="font-label text-xs font-medium text-on-surface-variant">Report</span>
+</div>
+</div>
+</section>
+<!-- Package Summary Bento -->
+<section class="grid grid-cols-2 gap-4">
+<div class="col-span-2 bg-surface-container-lowest rounded-xl p-6 card-shadow">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[1.25rem]">folder_zip</span>
+</div>
+<h3 class="font-headline text-lg font-semibold text-on-surface">Analysis Package Summary</h3>
+</div>
+<div class="grid grid-cols-3 gap-6">
+<div class="flex flex-col gap-1">
+<span class="font-label text-xs text-on-surface-variant uppercase tracking-wider">Source File</span>
+<span class="font-body text-sm font-medium text-on-surface truncate">Mavic_Survey_001.mp4</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label text-xs text-on-surface-variant uppercase tracking-wider">Duration</span>
+<span class="font-body text-sm font-medium text-on-surface">00:14:23</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label text-xs text-on-surface-variant uppercase tracking-wider">Resolution</span>
+<span class="font-body text-sm font-medium text-on-surface">4K (3840x2160)</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 card-shadow flex flex-col justify-between">
+<span class="font-label text-xs text-on-surface-variant uppercase tracking-wider mb-2">Keyframes Extracted</span>
+<div class="flex items-end gap-2">
+<span class="font-headline text-4xl font-bold text-primary">842</span>
+<span class="font-body text-sm text-on-surface-variant mb-1">frames</span>
+</div>
+<div class="mt-4 w-full h-1.5 bg-surface-container-low rounded-full overflow-hidden">
+<div class="w-full h-full bg-primary rounded-full"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 card-shadow flex flex-col justify-between">
+<span class="font-label text-xs text-on-surface-variant uppercase tracking-wider mb-2">Objects Detected</span>
+<div class="flex items-end gap-2">
+<span class="font-headline text-4xl font-bold text-on-surface">--</span>
+<span class="font-body text-sm text-on-surface-variant mb-1">pending</span>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm">schedule</span>
+<span class="font-label text-xs text-on-surface-variant">Waiting for Prompt step</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Visual Preview (5 cols) -->
+<div class="lg:col-span-5">
+<div class="bg-surface-container-lowest rounded-xl p-6 card-shadow h-full flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline text-lg font-semibold text-on-surface">Contact Sheet Preview</h3>
+<button class="text-primary hover:bg-surface-container-low p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[1.25rem]">fullscreen</span>
+</button>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-lg overflow-hidden relative border border-outline-variant/10">
+<!-- Placeholder Image -->
+<div class="absolute inset-0 grid grid-cols-3 grid-rows-3 gap-1 p-1">
+<div class="bg-slate-300 rounded-sm relative overflow-hidden group">
+<img alt="Landscape 1" class="w-full h-full object-cover opacity-80" data-alt="aerial drone shot of winding river through a lush green valley during daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt88iUAoIohe7lZrCd4kPSIgQs7rwdYeoadnaHhG27QuddEmBmp9GxEPx2SeNRfQ8tbf3feJud2huuJyJmMVXe_WlAVUd6WNMzSwO2m7KLET0juyNol5UNJoaaC4DfTxgqGuhd0hZk563cKHxGywky0t53Na1E_x65V2BlvvuZcO0EanVnVSEHLnHOp0afpODMLktlwJuOuDZKtzc3u20nCq8D3IdyuL1vImnoWNfwQZmQoJEShtqjASn9uWhe3-1RdolvuROztszB"/>
+</div>
+<div class="bg-slate-300 rounded-sm relative overflow-hidden group">
+<img alt="Landscape 2" class="w-full h-full object-cover opacity-80 grayscale" data-alt="aerial drone shot of winding river through a lush green valley during daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUHXYViNEVRLFGDH00F3X2XnvJjuyNLl5mqcagxedpjbvORQxwCT4KWc43skeJtFkGzfXatCznYvsEDye8mAF8wyM7FAvbI_hKff6eSVswqp6puI7_sUyD19fdgg9VtMsl1NecjFk4gegGOknsyjFG1BEItZ5F6TJnSm_va5CoVorU1APDildEbPYXMhbhL3ifL7NTiceq5BJlGJjTCY9sGQ7tiyit64KD-yt7Wn4Nk5JrcnN7ondAIVGl8GQctpvfumPtg75nhq_h"/>
+</div>
+<div class="bg-slate-300 rounded-sm relative overflow-hidden group">
+<img alt="Landscape 3" class="w-full h-full object-cover opacity-80" data-alt="aerial drone shot of winding river through a lush green valley during daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjl-0czuYFs6PQ4Go3B-xqo9Gmg-BwN3MuqyPQubhjhQffU55yz7FC4tGx2oqCKBgsxXYiA_4SZBIF8Wy-C9VaJ-CofCH9P2SDtXtN0qBbf-W_5z7F4nhYuV8uJQcNZ6vND1I7nVj6oDtJMQ40qd43jKrglnYq0YZY7MLZgh94Qeb6zRLmoiJiWgG5LSwspFLuejM8ffM0_ic5U4RcO77mgUhYiGxzR1EnnS3iCIu4l4WxrZeDIhNJyMs6Tc1mjsUzaVJrXCkU3TUs"/>
+</div>
+<div class="bg-slate-300 rounded-sm relative overflow-hidden group">
+<img alt="Landscape 4" class="w-full h-full object-cover opacity-80" data-alt="aerial drone shot of winding river through a lush green valley during daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvPqMv77TkhF6_IUoMaTrCu3zV1C7tHnAoHgfl3I7gyOJjPggSlp9rUXElopms_hBokfRr-fA7G1d9sTzhb0nMCPOGEyvD7T8cdv_qzMi9SDY7MoyNSVO81HXzJ22992kVZl-5maB3H26GSxDK-DjboNoieoPSGcU8B2XzDi4yYzjL-H-fxjEHgzdc7-jyUsBFdoSPemP7tST_Liu3Ks05KllLu_TA6JLhhhjJAiDrDSGryWrfh3xdt0LPqWaQC-tgm--ulujztz-o"/>
+</div>
+<div class="bg-slate-300 rounded-sm relative overflow-hidden group">
+<img alt="Landscape 5" class="w-full h-full object-cover opacity-80 grayscale" data-alt="aerial drone shot of winding river through a lush green valley during daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEBhaxvcGFSguNr-YdGorBiKc7IvfIKvkdxS2JnAZQfRyp6CNz5Y9rL2SJ6FGlbNGVBJYP3KhW0pECMh1_xKJ_bOuYC3UrXskqeVxLd855AT46jR7Pqu7daQTAwo_dSsYmSfJ7iLbTR6j-1Cco_uYJOhBeDPI-GCXg0R12lm_Rjmae3U1WYA3rXTamwnjt5LAJPBIfdVKmfsMeCOeIDetYfgNN84khY2QrWdVIz2SZdVyVFgTZSbSMJZQrnuwt_tYF-w6cH4Cgcdm2"/>
+</div>
+<div class="bg-slate-300 rounded-sm relative overflow-hidden group">
+<img alt="Landscape 6" class="w-full h-full object-cover opacity-80" data-alt="aerial drone shot of winding river through a lush green valley during daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4Tji2oBG4xVdPVjUsJ2_krvA80uM8i_M8XFUaYelbq1Bp-HlE4s-lxYjMVPJx1wv8eZWrvdXSJ8u80M6lHrdebiBWPkxp2yZg-dYHqNQ8EC_hP2Rxy1NtpwThp6d9GN-ndc3GxsLP6zmbITRGgoarql7yo99HRmajxqw3wyUg0F97LdbWQJl1bzKLPzjS8mrtUpZkUjnzDr8PdgAUE9VhpJiMsG12uT8hVO5U9ZYU7ON_mcT4tyZoCwcYg1kZV766vl7w8ii7G0Xq"/>
+</div>
+</div>
+<!-- Overlay Glass Panel -->
+<div class="absolute bottom-4 left-4 right-4 glass-panel rounded-lg p-4 flex items-center justify-between border border-white/40 shadow-lg">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[1.25rem]">grid_on</span>
+<span class="font-body text-sm font-medium text-on-surface">3x3 Grid View</span>
+</div>
+<span class="font-label text-xs text-on-surface-variant bg-white/50 px-2 py-1 rounded">Generated</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

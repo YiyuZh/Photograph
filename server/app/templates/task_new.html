@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %}新建任务 - 智摄{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <span class="eyebrow">New Analysis</span>
+    <h1>创建新的分析任务</h1>
+    <p>这一步只做两件事：确定任务目标，以及决定是否在创建时直接导入本地预处理好的分析包。</p>
+  </div>
+</section>
+
+<section class="workspace-grid">
+  <article class="panel">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">任务基础信息</h2>
+        <p class="section-subtitle">保持字段简单，让首版在低配服务器上也能稳定工作。</p>
+      </div>
+    </div>
+
+    {% if error %}
+    <div class="alert alert-error">{{ error }}</div>
+    {% endif %}
+
+    <form class="form" method="post" enctype="multipart/form-data">
+      <label>
+        <span>任务类型</span>
+        <select name="task_type" required>
+          <option value="reference">拆解参考视频</option>
+          <option value="improve">优化我的视频</option>
+        </select>
+      </label>
+      <label>
+        <span>任务标题</span>
+        <input type="text" name="title" placeholder="例如：品牌广告拆解 / 口播视频优化" required />
+      </label>
+      <label>
+        <span>任务说明</span>
+        <textarea name="description" rows="6" placeholder="补充风格诉求、重点镜头、要分析的问题"></textarea>
+      </label>
+      <label>
+        <span>分析包 ZIP（可选）</span>
+        <input type="file" name="package_file" accept=".zip" />
+      </label>
+      <button type="submit" class="button">
+        <span class="material-symbols-outlined">rocket_launch</span>
+        <span>创建任务</span>
+      </button>
+    </form>
+  </article>
+
+  <div class="stack">
+    <article class="panel panel-muted">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">导入流程预览</h2>
+          <p class="section-subtitle">虽然首版没有实时上传进度条，但导入顺序已经固定下来了。</p>
+        </div>
+      </div>
+      <div class="upload-guidance">
+        <div class="upload-stage">
+          <span class="upload-stage-dot"><span class="material-symbols-outlined">cloud_upload</span></span>
+          <div>
+            <strong>上传分析包</strong>
+            <p class="micro-copy">把本地预处理生成的 ZIP 安全上传到任务目录。</p>
+          </div>
+        </div>
+        <div class="upload-stage">
+          <span class="upload-stage-dot"><span class="material-symbols-outlined">data_object</span></span>
+          <div>
+            <strong>解析 metadata / segments</strong>
+            <p class="micro-copy">系统写入摘要、文件索引和片段数据，缺非核心文件时允许降级。</p>
+          </div>
+        </div>
+        <div class="upload-stage">
+          <span class="upload-stage-dot"><span class="material-symbols-outlined">auto_awesome</span></span>
+          <div>
+            <strong>进入 Prompt 阶段</strong>
+            <p class="micro-copy">导入完成后就可以在任务详情里继续生成 Prompt。</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="panel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">最小分析包要求</h2>
+          <p class="section-subtitle">保证链路稳定跑通的最小文件集合。</p>
+        </div>
+      </div>
+      <ul class="simple-list">
+        <li><strong>必须识别：</strong>`task_manifest.json`、`metadata.json`、联系表图或至少一张关键帧。</li>
+        <li><strong>尽量识别：</strong>`segments.json`、`transcript.txt`、`frames/`、`segment_keyframes/`。</li>
+        <li><strong>允许降级：</strong>缺 transcript / audio 可以继续，但 Prompt 质量会受影响。</li>
+      </ul>
+    </article>
+  </div>
+</section>
+{% endblock %}

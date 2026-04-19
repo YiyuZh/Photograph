@@ -1,0 +1,18 @@
+{% macro status_badge(status) -%}
+  {% set labels = {
+    "created": "待上传",
+    "package_uploaded": "已导入分析包",
+    "prompt_generated": "Prompt 已生成",
+    "result_filled": "结果已回填",
+    "report_ready": "报告已完成"
+  } %}
+  <span class="badge badge-{{ status|replace('_', '-') }}">{{ labels.get(status, status) }}</span>
+{%- endmacro %}
+
+{% macro task_type_badge(task_type) -%}
+  {% set labels = {
+    "reference": "拆解任务",
+    "improve": "优化任务"
+  } %}
+  <span class="badge badge-{{ task_type }}">{{ labels.get(task_type, task_type) }}</span>
+{%- endmacro %}

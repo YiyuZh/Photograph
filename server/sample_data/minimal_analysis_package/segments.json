@@ -1,0 +1,29 @@
+[
+  {
+    "segment_index": 0,
+    "start_sec": 0.0,
+    "end_sec": 4.2,
+    "duration_sec": 4.2,
+    "title": "开场建立环境",
+    "summary": "城市街景和人物背影快速建立主题。",
+    "keyframe_path": "segment_keyframes/seg_000_01.png"
+  },
+  {
+    "segment_index": 1,
+    "start_sec": 4.2,
+    "end_sec": 10.0,
+    "duration_sec": 5.8,
+    "title": "人物行动推进",
+    "summary": "镜头切换速度提升，节奏开始明显加快。",
+    "keyframe_path": "segment_keyframes/seg_001_01.png"
+  },
+  {
+    "segment_index": 2,
+    "start_sec": 10.0,
+    "end_sec": 18.4,
+    "duration_sec": 8.4,
+    "title": "结尾情绪收束",
+    "summary": "使用慢动作和特写，完成情绪收束。",
+    "keyframe_path": "segment_keyframes/seg_002_01.png"
+  }
+]

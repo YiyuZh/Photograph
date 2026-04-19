@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f9ff" />
+    <title>{% block title %}智摄{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}" />
+    {% block head %}{% endblock %}
+  </head>
+  <body class="{% block body_class %}{% if current_user %}app-body{% else %}auth-body{% endif %}{% endblock %}">
+    {% set current_path = request.url.path %}
+    {% if current_user %}
+    {% set avatar_char = (current_user.display_name or current_user.username or 'Z')[:1] %}
+
+    <div class="mobile-backdrop" data-drawer-close></div>
+    <aside class="mobile-drawer" data-mobile-drawer>
+      <div class="mobile-drawer-header">
+        <div class="mobile-profile">
+          <span class="mobile-avatar">{{ avatar_char }}</span>
+          <div>
+            <strong>{{ current_user.display_name or current_user.username }}</strong>
+            <p>@{{ current_user.username }}</p>
+          </div>
+        </div>
+        <button class="drawer-close" type="button" data-drawer-close>
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <a class="sidebar-cta mobile-cta" href="/tasks/new">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+        <span>新建分析</span>
+      </a>
+
+      <nav class="drawer-nav">
+        <a class="nav-link {% if current_path == '/' %}is-active{% endif %}" href="/">
+          <span class="material-symbols-outlined">home</span>
+          <span>工作台</span>
+        </a>
+        <a class="nav-link {% if current_path.startswith('/tasks') %}is-active{% endif %}" href="/tasks">
+          <span class="material-symbols-outlined">biotech</span>
+          <span>任务中心</span>
+        </a>
+        <a class="nav-link {% if current_path.startswith('/knowledge') %}is-active{% endif %}" href="/knowledge">
+          <span class="material-symbols-outlined">library_books</span>
+          <span>知识库</span>
+        </a>
+        <a class="nav-link {% if current_path.startswith('/settings') %}is-active{% endif %}" href="/settings">
+          <span class="material-symbols-outlined">settings</span>
+          <span>设置</span>
+        </a>
+      </nav>
+
+      <form class="drawer-logout" method="post" action="/logout">
+        <button type="submit" class="button button-secondary">
+          <span class="material-symbols-outlined">logout</span>
+          <span>退出登录</span>
+        </button>
+      </form>
+    </aside>
+
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <a class="brand-lockup" href="/">
+            <span class="brand-badge">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lens_blur</span>
+            </span>
+            <span>
+              <strong class="brand-name">智摄</strong>
+              <p class="brand-note">Precision Lens v1.0</p>
+            </span>
+          </a>
+
+          <a class="sidebar-cta" href="/tasks/new">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+            <span>新建分析任务</span>
+          </a>
+
+          <nav class="nav">
+            <a class="nav-link {% if current_path == '/' %}is-active{% endif %}" href="/">
+              <span class="material-symbols-outlined">dashboard</span>
+              <span>工作台</span>
+            </a>
+            <a class="nav-link {% if current_path.startswith('/tasks') %}is-active{% endif %}" href="/tasks">
+              <span class="material-symbols-outlined">biotech</span>
+              <span>任务中心</span>
+            </a>
+            <a class="nav-link {% if current_path.startswith('/knowledge') %}is-active{% endif %}" href="/knowledge">
+              <span class="material-symbols-outlined">library_books</span>
+              <span>知识库</span>
+            </a>
+            <a class="nav-link {% if current_path.startswith('/settings') %}is-active{% endif %}" href="/settings">
+              <span class="material-symbols-outlined">settings</span>
+              <span>设置</span>
+            </a>
+          </nav>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="user-meta">
+            <span class="user-avatar">{{ avatar_char }}</span>
+            <div class="user-copy">
+              <strong>{{ current_user.display_name or current_user.username }}</strong>
+              <span>@{{ current_user.username }}</span>
+            </div>
+          </div>
+          <form method="post" action="/logout">
+            <button type="submit" class="button button-secondary" style="width: 100%;">
+              <span class="material-symbols-outlined">logout</span>
+              <span>退出登录</span>
+            </button>
+          </form>
+        </div>
+      </aside>
+
+      <main class="app-main">
+        <header class="app-topbar">
+          <div class="topbar-leading">
+            <button class="mobile-menu-button" type="button" data-drawer-open>
+              <span class="material-symbols-outlined">menu</span>
+            </button>
+            <nav class="topnav-links">
+              <a class="topnav-link {% if current_path == '/' %}is-active{% endif %}" href="/">WORKBENCH</a>
+              <a class="topnav-link {% if current_path.startswith('/tasks') %}is-active{% endif %}" href="/tasks">TASKS</a>
+              <a class="topnav-link {% if current_path.startswith('/knowledge') %}is-active{% endif %}" href="/knowledge">KNOWLEDGE</a>
+              <a class="topnav-link {% if current_path.startswith('/settings') %}is-active{% endif %}" href="/settings">SETTINGS</a>
+            </nav>
+          </div>
+
+          <div class="topbar-actions">
+            <form class="topbar-search" method="get" action="/knowledge">
+              <span class="material-symbols-outlined">search</span>
+              <input
+                type="search"
+                name="q"
+                placeholder="Search knowledge..."
+                value="{{ request.query_params.get('q', '') if current_path.startswith('/knowledge') else '' }}"
+              />
+            </form>
+            <a class="icon-button" href="/tasks" title="任务历史">
+              <span class="material-symbols-outlined">history</span>
+            </a>
+            <a class="icon-button" href="/knowledge" title="帮助与知识库">
+              <span class="material-symbols-outlined">help_outline</span>
+            </a>
+            <a class="icon-button" href="/settings" title="账号与设置">
+              <span class="material-symbols-outlined">account_circle</span>
+            </a>
+          </div>
+        </header>
+
+        <div class="content-shell">
+    {% else %}
+    <main class="auth-main">
+      <div class="auth-shell">
+    {% endif %}
+          {% block content %}{% endblock %}
+    {% if current_user %}
+        </div>
+      </main>
+    </div>
+
+    <nav class="bottom-nav">
+      <a class="bottom-nav-link {% if current_path == '/' %}is-active{% endif %}" href="/">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>工作台</span>
+      </a>
+      <a class="bottom-nav-link {% if current_path.startswith('/tasks') %}is-active{% endif %}" href="/tasks">
+        <span class="material-symbols-outlined">biotech</span>
+        <span>任务</span>
+      </a>
+      <a class="bottom-nav-link {% if current_path.startswith('/knowledge') %}is-active{% endif %}" href="/knowledge">
+        <span class="material-symbols-outlined">library_books</span>
+        <span>知识库</span>
+      </a>
+      <a class="bottom-nav-link {% if current_path.startswith('/settings') %}is-active{% endif %}" href="/settings">
+        <span class="material-symbols-outlined">settings</span>
+        <span>设置</span>
+      </a>
+    </nav>
+    {% else %}
+      </div>
+    </main>
+    {% endif %}
+
+    {% block scripts %}{% endblock %}
+    {% if current_user %}
+    <script>
+      (() => {
+        const body = document.body;
+        const drawer = document.querySelector("[data-mobile-drawer]");
+        const openers = document.querySelectorAll("[data-drawer-open]");
+        const closers = document.querySelectorAll("[data-drawer-close]");
+        if (!drawer || openers.length === 0) return;
+
+        const openDrawer = () => body.classList.add("drawer-open");
+        const closeDrawer = () => body.classList.remove("drawer-open");
+
+        openers.forEach((item) => item.addEventListener("click", openDrawer));
+        closers.forEach((item) => item.addEventListener("click", closeDrawer));
+        drawer.querySelectorAll("a").forEach((item) => item.addEventListener("click", closeDrawer));
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") closeDrawer();
+        });
+      })();
+    </script>
+    {% endif %}
+  </body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zhishe - Final Analysis Report</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#d8e2ff",
+                        "inverse-primary": "#adc6ff",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffdbcc",
+                        "secondary-container": "#a1befd",
+                        "surface-container": "#e6eeff",
+                        "on-surface-variant": "#414755",
+                        "primary": "#0058bc",
+                        "outline-variant": "#c1c6d7",
+                        "tertiary": "#9e3d00",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-high": "#dce9ff",
+                        "on-tertiary-fixed": "#351000",
+                        "on-primary-container": "#fefcff",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-secondary-fixed": "#001a41",
+                        "primary-fixed": "#d8e2ff",
+                        "surface-container-highest": "#d5e3fc",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb595",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-secondary-container": "#2d4c83",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#004493",
+                        "outline": "#717786",
+                        "error": "#ba1a1a",
+                        "background": "#f8f9ff",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#c64f00",
+                        "on-tertiary-fixed-variant": "#7c2e00",
+                        "on-primary-fixed": "#001a41",
+                        "inverse-surface": "#233144",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-tint": "#005bc1",
+                        "surface": "#f8f9ff",
+                        "on-tertiary-container": "#fffbff",
+                        "on-background": "#0d1c2e",
+                        "primary-container": "#0070eb",
+                        "surface-container-low": "#eff4ff",
+                        "secondary": "#405e96",
+                        "surface-dim": "#ccdbf3",
+                        "on-surface": "#0d1c2e",
+                        "on-secondary-fixed-variant": "#26467d",
+                        "surface-variant": "#d5e3fc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen flex selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar (from JSON) -->
+<nav class="hidden md:flex flex-col gap-2 p-4 fixed left-0 top-0 h-screen w-64 border-r border-slate-200/20 bg-slate-50 dark:bg-slate-900 z-50 tonal-nesting surface-container-low flat-ui">
+<!-- Brand Header -->
+<div class="px-3 py-4 mb-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-[#0058bc] flex items-center justify-center text-white font-black font-['Manrope'] text-lg shadow-sm">Z</div>
+<div>
+<h1 class="font-['Manrope'] font-black text-[#0058bc] leading-tight">Zhishe</h1>
+<p class="font-['Inter'] text-[0.8125rem] font-medium text-slate-500">Video Analysis</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<!-- Tab 1: Home (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg hover:translate-x-1 transition-all duration-300 scale-active-95 font-['Inter'] text-[0.8125rem] font-medium group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-[#0058bc] transition-colors" data-icon="grid_view">grid_view</span>
+            Home
+        </a>
+<!-- Tab 2: Tasks (Active) -->
+<a class="flex items-center gap-3 px-3 py-2 bg-[#0058bc] text-white rounded-lg shadow-lg shadow-blue-500/20 hover:translate-x-1 transition-all duration-300 scale-active-95 font-['Inter'] text-[0.8125rem] font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="assignment_turned_in" style="font-variation-settings: 'FILL' 1;">assignment_turned_in</span>
+            Tasks
+        </a>
+<!-- Tab 3: Knowledge Base (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg hover:translate-x-1 transition-all duration-300 scale-active-95 font-['Inter'] text-[0.8125rem] font-medium group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-[#0058bc] transition-colors" data-icon="auto_stories">auto_stories</span>
+            Knowledge Base
+        </a>
+<!-- Tab 4: Settings (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg hover:translate-x-1 transition-all duration-300 scale-active-95 font-['Inter'] text-[0.8125rem] font-medium group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-[#0058bc] transition-colors" data-icon="settings">settings</span>
+            Settings
+        </a>
+<div class="mt-auto pt-4">
+<button class="w-full flex items-center justify-center gap-2 py-2.5 bg-white border border-slate-200 text-[#0058bc] rounded-lg font-['Inter'] text-[0.8125rem] font-medium shadow-sm hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Analysis
+            </button>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 md:ml-64 flex flex-col min-w-0">
+<!-- TopNavBar (from JSON) -->
+<header class="fixed top-0 w-full z-40 border-b border-slate-200/20 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(13,28,46,0.04)] tonal-transition bg-slate-50/50 dark:bg-slate-900/50 transition-all duration-200">
+<!-- Adjusted padding to account for sidenav on desktop visually, though it spans full width -->
+<div class="flex items-center justify-between px-6 h-16 w-full md:pl-72 lg:pr-12">
+<!-- Left: Search & Nav -->
+<div class="flex items-center gap-8 h-full">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-slate-100/50 dark:bg-slate-800/50 border-none rounded-lg text-sm font-['Inter'] focus:ring-2 focus:ring-[#0058bc]/20 w-64 transition-all" placeholder="Search..." type="text"/>
+</div>
+<nav class="hidden md:flex items-center h-full gap-6">
+<a class="h-full flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-colors duration-200 cursor-pointer active:scale-98 transition-transform font-['Manrope'] text-sm tracking-tight px-2" href="#">Projects</a>
+<a class="h-full flex items-center text-[#0058bc] dark:text-[#0070eb] font-semibold border-b-2 border-[#0058bc] font-['Manrope'] text-sm tracking-tight px-2" href="#">Current Task</a>
+</nav>
+</div>
+<!-- Right: Actions & Profile -->
+<div class="flex items-center gap-4">
+<button class="text-slate-500 hover:text-[#0058bc] transition-colors p-2 rounded-full hover:bg-slate-100/50">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-500 hover:text-[#0058bc] transition-colors p-2 rounded-full hover:bg-slate-100/50">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden border border-slate-200/50 cursor-pointer">
+<img alt="Photographer Profile" class="w-full h-full object-cover" data-alt="close up headshot of a professional wearing a blue shirt against a blurred background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrUR8bu8znQDbbNuX4-rg2cSI12fXmXaf7aOLtTISHAjVwB-WM2bvHEOIY7FXj1KGVcZBh79H0kKO7KhpmBXX3fI9EOYw5_frqg6gzbCnVZTa5pRqhT7g7gxZ1vDEq2H0kWp1DejVZFYfuG0rBPmlfL1RexViF-KxMPmG1cYRECAjgwVVlD4MjDoXTNDrn5jyxMLIFV2KXmDXTkw31HsT7Im65PnRMPse7p6euLEY_Dyawxgg3DLkS3J52_kGjk-qvHUwRZwBpHVkn"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="mt-16 p-6 lg:p-12 space-y-10 max-w-7xl mx-auto w-full">
+<!-- Page Header -->
+<header class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline text-display-sm lg:text-display-md text-on-surface font-semibold tracking-tight">Final Analysis Report</h2>
+<p class="font-body text-sm text-on-surface-variant mt-1">Generated for Task: "Cinematic Cityscape B-Roll"</p>
+</div>
+<button class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-body text-sm font-medium shadow-[0_8px_16px_-4px_rgba(0,88,188,0.3)] hover:opacity-90 transition-opacity whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                    Export as Markdown
+                </button>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Overall Conclusion (Spans Full) -->
+<section class="lg:col-span-3 bg-surface-container-lowest rounded-xl p-8 space-y-4">
+<h3 class="font-headline text-headline-sm text-on-surface font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">insights</span>
+                        Overall Conclusion
+                    </h3>
+<p class="font-body text-on-surface-variant leading-relaxed text-[0.9375rem] max-w-4xl">
+                        The analyzed footage demonstrates a high degree of architectural clarity and deliberate pacing. The visual narrative relies heavily on juxtaposition between stark, geometric urban structures and organic human movement. Lighting is consistently executed during the 'golden hour' window, providing a natural warmth that softens the brutalist concrete elements. The primary stylistic anchor is a moody, desaturated palette with targeted cyan/teal highlights to draw the eye to key focal points.
+                    </p>
+</section>
+<!-- Style Tags (Col 1) -->
+<section class="bg-surface-container-lowest rounded-xl p-8 space-y-6 flex flex-col justify-between">
+<div>
+<h3 class="font-headline text-headline-sm text-on-surface font-medium mb-4">Detected Style Tags</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface text-xs font-label font-medium">Cinematic</span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface text-xs font-label font-medium">Moody</span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface text-xs font-label font-medium">High Contrast</span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface text-xs font-label font-medium">Urban</span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface text-xs font-label font-medium">Golden Hour</span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface text-xs font-label font-medium">Slow Motion</span>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-surface-variant/50">
+<p class="font-label text-xs text-outline mb-1">Confidence Score</p>
+<div class="flex items-baseline gap-2">
+<span class="font-headline text-2xl text-on-surface font-bold">94%</span>
+<span class="material-symbols-outlined text-green-500 text-[18px]">check_circle</span>
+</div>
+</div>
+</section>
+<!-- Color Grading Theory (Col 2 & 3) -->
+<section class="lg:col-span-2 bg-surface-container-lowest rounded-xl p-8 flex flex-col sm:flex-row gap-8">
+<div class="flex-1 space-y-4">
+<h3 class="font-headline text-headline-sm text-on-surface font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">palette</span>
+                            Color Grading Theory
+                        </h3>
+<p class="font-body text-on-surface-variant text-[0.9375rem] leading-relaxed">
+                            The scene predominantly utilizes a Teal and Orange cinematic split tone. Shadows are pushed aggressively into deep cyan (#0B1C2E) to cool the darker regions, while midtones and highlights retain a warm, desaturated amber (#E2A36B) to maintain skin tone fidelity. Overall saturation is lowered by approximately 15%, shifting the focus to luminance contrast rather than chromatic intensity.
+                        </p>
+</div>
+<div class="w-full sm:w-48 flex-shrink-0 flex flex-col gap-2">
+<div class="h-12 w-full rounded-lg bg-[#0B1C2E] shadow-sm flex items-end p-2">
+<span class="text-white/70 text-[10px] font-mono">#0B1C2E</span>
+</div>
+<div class="h-12 w-full rounded-lg bg-[#234559] shadow-sm flex items-end p-2">
+<span class="text-white/70 text-[10px] font-mono">#234559</span>
+</div>
+<div class="h-12 w-full rounded-lg bg-[#E2A36B] shadow-sm flex items-end p-2">
+<span class="text-black/50 text-[10px] font-mono">#E2A36B</span>
+</div>
+<div class="h-12 w-full rounded-lg bg-[#F2DAC3] shadow-sm flex items-end p-2">
+<span class="text-black/50 text-[10px] font-mono">#F2DAC3</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Detailed Breakdown (Vertical list without hr) -->
+<section class="space-y-6 pt-4">
+<h3 class="font-headline text-headline-sm text-on-surface font-medium">Scene Breakdown &amp; Suggestions</h3>
+<div class="grid gap-6">
+<!-- Item 1 -->
+<div class="bg-surface-container-low rounded-xl p-6 flex flex-col md:flex-row gap-6 items-start">
+<div class="md:w-48 flex-shrink-0">
+<div class="aspect-video bg-surface-variant rounded-lg overflow-hidden relative">
+<img alt="Cityscape" class="w-full h-full object-cover" data-alt="wide aerial shot of a dense city skyline with geometric skyscrapers under a clear sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACpqUed3r87qD9nUqpnpp4fzqzCShosLg4JLNYwRXHvBScq2ZJcLADxC4TX335YD6ku7S27lcKREhSRKJa7Be9NOTagLwHu1KWimJmEhP5fW_YkrcqbW4a6PtRtuz8v9gtgYr-qBbHeJB_XawsuC1ujIM7SEgklOOQqZl9xdjcRIjiGMef4JxyIIYBjD1hLa8H_TiVkoqNJn6y9zf8duigTv0T77t6ii7zNnataN40iG_z2xYgNpIh5_xleJTdCFv4xUEZdupzkfZC"/>
+<span class="absolute bottom-2 right-2 bg-black/60 text-white text-[10px] font-mono px-1.5 py-0.5 rounded backdrop-blur-md">00:12 - 00:18</span>
+</div>
+</div>
+<div class="flex-1 space-y-3">
+<h4 class="font-headline text-on-surface font-medium">Establishing Wide Shot</h4>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                                Strong geometric composition. The framing effectively utilizes the leading lines of the avenue to draw the eye towards the central subject. The pacing of the pan is smooth.
+                            </p>
+<div class="bg-surface-container-highest/50 rounded-lg p-3 inline-block">
+<p class="font-label text-xs text-secondary-container font-medium flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">videocam</span>
+                                    Filming Suggestion: Consider a slower tracking speed (approx. 20% reduction) to let the scale of the architecture breathe more before cutting.
+                                </p>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-low rounded-xl p-6 flex flex-col md:flex-row gap-6 items-start">
+<div class="md:w-48 flex-shrink-0">
+<div class="aspect-video bg-surface-variant rounded-lg overflow-hidden relative">
+<img alt="Close up subject" class="w-full h-full object-cover" data-alt="close up profile of a person looking thoughtfully away with warm dramatic side lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWyrJXaHFjrzHv7VhvVg_57bUkSRRS_h_QSR3E6s3hf5YXlktiva7oPTAa3iVsUTreFj-EuouYDoe0jTojG9v_otDkW6Zi13RFwwLP9ZLSJp2GbcI6yhti8PKBCyXin6NlZ5GnOPVCUxs6iyfE9V0JgsgH0FmgfLqdXOOuxK05O4AGOB6i_c-pJX8jirVfT8H85N5awjnLu2CzaneNZTvTWjbXRqLIaWLHBmqDjaCsEeDn-kQvFTg55INJOxR9SQQYhp7a4WaPjqXu"/>
+<span class="absolute bottom-2 right-2 bg-black/60 text-white text-[10px] font-mono px-1.5 py-0.5 rounded backdrop-blur-md">00:24 - 00:31</span>
+</div>
+</div>
+<div class="flex-1 space-y-3">
+<h4 class="font-headline text-on-surface font-medium">Subject Close-up</h4>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                                Excellent isolation of the subject using a shallow depth of field (estimated f/1.8). The backlighting creates a pleasing rim light that separates the subject from the dark background.
+                            </p>
+<div class="bg-surface-container-highest/50 rounded-lg p-3 inline-block">
+<p class="font-label text-xs text-secondary-container font-medium flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">wb_sunny</span>
+                                    Lighting Suggestion: A subtle negative fill on the camera-left side would increase contrast ratio and enhance the moody aesthetic noted in the style tags.
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

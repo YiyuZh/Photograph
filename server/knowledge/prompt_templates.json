@@ -1,0 +1,20 @@
+[
+  {
+    "template_key": "reference_default",
+    "task_type": "reference",
+    "name": "拆解模式默认模板",
+    "description": "用于参考视频拆解",
+    "template_text": "你现在是一名专业的视频审片与拆解顾问。请基于以下信息，完成参考视频拆解分析。\n\n任务标题：{task_title}\n任务说明：{task_description}\n视频文件：{video_name}\n视频基础信息：\n{metadata_summary}\n\n片段摘要：\n{segments_summary}\n\n字幕摘要：\n{transcript_summary}\n\n知识库提示：\n{knowledge_summary}\n\n请输出：\n1. 总体风格判断\n2. 风格标签\n3. 调色推测\n4. 剪辑结构分析\n5. 片段拆解\n6. 疑似 AI 生成片段提示\n7. 仿拍方案",
+    "follow_up_text": "推荐追问：\n1. 请把这支视频按开头、中段、结尾拆成更细的镜头策略。\n2. 请给出仿拍时的镜头清单与拍摄顺序。\n3. 如果我要保持类似风格但降低拍摄成本，可以删减哪些部分？",
+    "fillback_template_text": "请按以下结构回填：\n# 总体结论\n# 风格标签\n# 调色推测\n# 剪辑结构分析\n# 片段拆解\n# 疑似 AI 生成片段提示\n# 仿拍方案"
+  },
+  {
+    "template_key": "improve_default",
+    "task_type": "improve",
+    "name": "优化模式默认模板",
+    "description": "用于优化自己的视频",
+    "template_text": "你现在是一名专业的视频优化顾问。请基于以下信息，判断这支视频有哪些必须修改、建议修改和可选优化点。\n\n任务标题：{task_title}\n任务说明：{task_description}\n视频文件：{video_name}\n视频基础信息：\n{metadata_summary}\n\n片段摘要：\n{segments_summary}\n\n字幕摘要：\n{transcript_summary}\n\n知识库提示：\n{knowledge_summary}\n\n请输出：\n1. 总体判断\n2. 必须改\n3. 建议改\n4. 可选优化\n5. 调色建议\n6. 剪辑建议\n7. 风格提升建议",
+    "follow_up_text": "推荐追问：\n1. 如果只允许我改 3 个点，最优先改什么？\n2. 请给出可以补拍的镜头建议。\n3. 请把节奏问题拆成可执行剪辑动作。",
+    "fillback_template_text": "请按以下结构回填：\n# 总体判断\n# 必须改\n# 建议改\n# 可选优化\n# 调色建议\n# 剪辑建议\n# 风格提升建议"
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "task_id": "sample-reference-task",
+  "task_type": "reference",
+  "package_name": "minimal_analysis_package",
+  "video_name": "sample_reference_video.mp4",
+  "tool_version": "0.1.0",
+  "package_format_version": "1.0",
+  "timezone": "Asia/Shanghai"
+}

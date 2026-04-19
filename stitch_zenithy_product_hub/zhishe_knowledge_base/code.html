@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Knowledge Base - Zhishe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#f8f9ff",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#d5e3fc",
+                        "secondary-fixed": "#d8e2ff",
+                        "primary-container": "#0070eb",
+                        "tertiary": "#9e3d00",
+                        "inverse-primary": "#adc6ff",
+                        "surface-container": "#e6eeff",
+                        "tertiary-fixed-dim": "#ffb595",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "secondary": "#405e96",
+                        "tertiary-container": "#c64f00",
+                        "surface-bright": "#f8f9ff",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#005bc1",
+                        "surface-container-low": "#eff4ff",
+                        "outline": "#717786",
+                        "on-primary-container": "#fefcff",
+                        "on-tertiary-fixed": "#351000",
+                        "on-tertiary-container": "#fffbff",
+                        "on-secondary-container": "#2d4c83",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#26467d",
+                        "inverse-on-surface": "#eaf1ff",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c1c6d7",
+                        "on-primary-fixed-variant": "#004493",
+                        "surface-container-highest": "#d5e3fc",
+                        "background": "#f8f9ff",
+                        "inverse-surface": "#233144",
+                        "secondary-container": "#a1befd",
+                        "on-background": "#0d1c2e",
+                        "on-secondary-fixed": "#001a41",
+                        "surface-dim": "#ccdbf3",
+                        "primary-fixed": "#d8e2ff",
+                        "on-surface": "#0d1c2e",
+                        "on-surface-variant": "#414755",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffdbcc",
+                        "on-primary-fixed": "#001a41",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7c2e00",
+                        "primary": "#0058bc",
+                        "surface-container-high": "#dce9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        h1, h2, h3, h4, h5, h6, .font-headline { font-family: 'Manrope', sans-serif; }
+        .glass-panel { background: rgba(248, 249, 255, 0.8); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
+        .gradient-primary { background: linear-gradient(135deg, theme('colors.primary'), theme('colors.primary-container')); }
+        .ghost-border { border: 1px solid rgba(193, 198, 215, 0.2); }
+        .ambient-shadow { box-shadow: 0 10px 40px -10px rgba(13, 28, 46, 0.06); }
+        
+        /* Hide scrollbar for clean look but keep functionality */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: theme('colors.surface-variant'); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: theme('colors.outline-variant'); }
+    </style>
+</head>
+<body class="bg-background min-h-screen flex text-on-background">
+<!-- SideNavBar (JSON Context) -->
+<nav class="h-screen w-64 flex-col fixed left-0 top-0 no-border shadow-none bg-[#eff4ff] dark:bg-slate-900 hidden md:flex flex-col h-full py-8 px-4 z-40">
+<div class="mb-12 px-4">
+<h1 class="text-2xl font-black font-manrope text-[#0d1c2e] dark:text-slate-100 tracking-tighter">Zhishe</h1>
+<p class="text-xs text-on-surface-variant font-label mt-1">Precision Lens v1.0</p>
+</div>
+<div class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#0058bc] dark:text-[#0070eb] font-bold border-r-4 border-[#0058bc] dark:border-[#0070eb] bg-white/50 dark:bg-white/5 font-manrope font-semibold tracking-tight text-sm scale-98 on click, smooth transition" href="#">
+<span class="material-symbols-outlined text-[20px]">library_books</span>
+                Knowledge Base
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 font-manrope font-semibold tracking-tight text-sm hover:bg-white/40 dark:hover:bg-slate-800/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+                Settings
+            </a>
+</div>
+<div class="mt-auto">
+<button class="w-full flex items-center justify-center gap-2 py-3 rounded-xl gradient-primary text-on-primary font-manrope font-bold text-sm ambient-shadow hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Entry
+            </button>
+<div class="mt-8 flex items-center gap-3 px-4">
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden">
+<img alt="Zhishe Admin Profile" class="w-full h-full object-cover" data-alt="professional headshot of a person with neutral expression, soft lighting, clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIOfWIVIdSIyIzx6eTMdj17owXrzsujJjdmYr-CE-bs8k4jCZH6J87oKyZtSd50iSFidK2QedaATE7btOmwqMvIRpGmJ1lbjgHC5xiu4CCB2lS33Frz9EqQgMrshoI6So4QMK3IcLMoKNoaUkRHNUF0bboDGusRNMTOHRWKIsmPhpfxEFml60uhVCbdRC6u8MB33TlYsD8LO8m0pVwmMi-BAPqlBKVQc5elGlBe_MifAK0ZPp25tEik0L9FNHAT7zs0VdngCfnBO6e"/>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold font-headline">Admin User</span>
+<span class="text-xs text-on-surface-variant font-label">Editor</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 w-full min-h-screen flex flex-col relative">
+<!-- TopNavBar (JSON Context) -->
+<header class="fixed top-0 right-0 w-full md:w-[calc(100%-16rem)] h-16 bg-[#f8f9ff]/80 backdrop-blur-2xl dark:bg-slate-950/80 border-b border-slate-200/20 dark:border-slate-800/20 shadow-sm dark:shadow-none z-30">
+<div class="flex items-center justify-between px-8 w-full h-full">
+<!-- Mobile Menu Button & Brand (Visible only on mobile) -->
+<div class="flex items-center gap-4 md:hidden">
+<button class="text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-manrope text-xl font-extrabold tracking-tighter text-[#0d1c2e] dark:text-white">Zhishe</span>
+</div>
+<!-- Navigation Links (Hidden on mobile as per TopNavBar logic for focused canvas, but keeping struct from JSON) -->
+<nav class="hidden md:flex items-center gap-8 h-full">
+<a class="h-full flex items-center text-slate-500 dark:text-slate-400 font-inter text-sm uppercase tracking-widest font-medium hover:text-[#0058bc] dark:hover:text-[#0070eb] transition-all" href="#">Dashboard</a>
+<a class="h-full flex items-center text-slate-500 dark:text-slate-400 font-inter text-sm uppercase tracking-widest font-medium hover:text-[#0058bc] dark:hover:text-[#0070eb] transition-all" href="#">Analytics</a>
+</nav>
+<!-- Search & Actions -->
+<div class="flex items-center gap-4 ml-auto">
+<!-- Search Bar (on_right) -->
+<div class="relative hidden sm:block w-64 group focus-within:ring-2 focus-within:ring-[#0058bc]/20 rounded-lg">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg pl-10 pr-4 py-2 text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-0 transition-colors placeholder:text-outline/70 font-body" placeholder="Search Knowledge Base..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:text-[#0058bc] dark:hover:text-[#0070eb] transition-all rounded-lg hover:bg-surface-container">
+<span class="material-symbols-outlined text-[20px]">help_outline</span>
+</button>
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:text-[#0058bc] dark:hover:text-[#0070eb] transition-all rounded-lg hover:bg-surface-container">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:text-[#0058bc] dark:hover:text-[#0070eb] transition-all rounded-lg hover:bg-surface-container md:hidden">
+<span class="material-symbols-outlined text-[20px]">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="pt-24 px-6 md:px-12 pb-24 max-w-7xl mx-auto w-full flex flex-col gap-12">
+<!-- Page Header (Editorial) -->
+<div class="flex flex-col gap-4">
+<h2 class="text-4xl md:text-5xl font-black font-headline tracking-tighter text-on-background">Knowledge Base</h2>
+<p class="text-on-surface-variant font-body text-lg max-w-2xl leading-relaxed">Centralized intelligence for advanced video analysis, cinematography protocols, and algorithmic grading techniques.</p>
+</div>
+<!-- Main Layout: Bento Grid + Side Filters -->
+<div class="flex flex-col lg:flex-row gap-8 items-start">
+<!-- Left Column: Contextual Filters (Floating panel style) -->
+<aside class="w-full lg:w-64 flex-shrink-0 bg-surface-container-low rounded-xl p-6 ghost-border flex flex-col gap-8 sticky top-28">
+<!-- Search Input (Mobile visible, distinct from topnav) -->
+<div class="sm:hidden relative w-full group rounded-lg">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg pl-10 pr-4 py-2 text-sm text-on-surface focus:outline-none focus:border-primary transition-colors font-body" placeholder="Search articles..." type="text"/>
+</div>
+<!-- Categories -->
+<div class="flex flex-col gap-4">
+<h3 class="font-headline font-bold text-sm tracking-widest uppercase text-on-surface">Categories</h3>
+<div class="flex flex-col gap-2 font-body text-sm">
+<button class="flex justify-between items-center px-3 py-2 rounded-lg bg-surface-container-lowest text-primary font-medium ghost-border">
+<span>All Topics</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-xs">42</span>
+</button>
+<button class="flex justify-between items-center px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span>Color Grading</span>
+<span class="bg-surface-variant/50 px-2 py-0.5 rounded text-xs">15</span>
+</button>
+<button class="flex justify-between items-center px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span>Cinematography</span>
+<span class="bg-surface-variant/50 px-2 py-0.5 rounded text-xs">12</span>
+</button>
+<button class="flex justify-between items-center px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span>Editing Techniques</span>
+<span class="bg-surface-variant/50 px-2 py-0.5 rounded text-xs">8</span>
+</button>
+<button class="flex justify-between items-center px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span>AI Analysis Models</span>
+<span class="bg-surface-variant/50 px-2 py-0.5 rounded text-xs">7</span>
+</button>
+</div>
+</div>
+<!-- Tags -->
+<div class="flex flex-col gap-4">
+<h3 class="font-headline font-bold text-sm tracking-widest uppercase text-on-surface">Tags</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-label text-xs font-medium cursor-pointer border border-primary/20">#LUTs</span>
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-label text-xs hover:bg-surface-container-highest cursor-pointer transition-colors">#exposure</span>
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-label text-xs hover:bg-surface-container-highest cursor-pointer transition-colors">#framing</span>
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-label text-xs hover:bg-surface-container-highest cursor-pointer transition-colors">#motion-tracking</span>
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-label text-xs hover:bg-surface-container-highest cursor-pointer transition-colors">#color-space</span>
+</div>
+</div>
+</aside>
+<!-- Right Column: Articles Grid -->
+<div class="flex-1 flex flex-col gap-6 w-full">
+<!-- Featured Article (Span full width of column) -->
+<div class="bg-surface-container-lowest rounded-xl p-1 lg:p-1.5 ghost-border ambient-shadow group relative overflow-hidden flex flex-col md:flex-row">
+<div class="w-full md:w-2/5 aspect-video md:aspect-auto rounded-lg overflow-hidden relative">
+<img alt="Color Grading Interface" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="close up of a professional video editing software interface showing color wheels and scopes, dark theme, glowing technical elements" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwa430Dod6J8xKd5rjmVfr5Fi8u1CLPqGqXmrLG3vIXbnSLB-DF42Tp0MhwKkUwz0elHRLITlRnYpeXtgKigI5wl_aTh4C0qbt0SaCZ7VdigI6UkybJH025vbU3sMuUVL0ZdXKXCuxZan-NOptlpPop85-FVawIiBkC-Au2AVdlU9mNOHMfHVoZC9ZgbP0eZPl8ovselaf7zTjccVxL7FIk47QmOt8oaXhYDsXLe8uzdQPf4RFzG1XeqvtIj_alMcu3IA-biQcGrj5"/>
+<div class="absolute top-4 left-4 bg-surface/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold font-headline text-primary">FEATURED</div>
+</div>
+<div class="w-full md:w-3/5 p-6 md:p-8 flex flex-col justify-center gap-4 bg-surface-container-lowest relative z-10">
+<div class="flex items-center gap-3 text-xs font-label text-on-surface-variant uppercase tracking-wider">
+<span>Color Grading</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>12 Min Read</span>
+</div>
+<h3 class="text-2xl font-bold font-headline text-on-background leading-tight group-hover:text-primary transition-colors cursor-pointer">Advanced LOG Conversion &amp; Rec.709 Normalization Pipelines</h3>
+<p class="text-on-surface-variant font-body text-sm leading-relaxed line-clamp-3">A comprehensive breakdown of algorithmic approaches to interpreting logarithmic camera profiles into standard display spaces without compromising dynamic range or introducing chromatic clipping.</p>
+<div class="mt-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-variant">
+<img alt="Author" class="w-full h-full object-cover" data-alt="portrait of a man with glasses, professional studio lighting, looking slightly off camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcH2vVzZ2v37nioKIOn4zqmaTinAi8XZy_Y3BW-4nML4f_2qUbm0f3PnitIj7ae-WpR3dSOBcNvVlA_zjYjbYbQ4YghG4xAAW0VBFPOl-CYOO9853FgfNHTC6XNe1KavVRdp6L6fRKPFs2qQ58Fo3FKYCxR1iv8vp7O8jdTqOevNZyNPndv8q-IGhaByMQNBfDRBrZUWfQ-bWW0ZDC4ENlh9fJyw8k6-ffZ_fTAjQVfoitwW8IRK7Lo_GodJVXmRE3L630b_4Nq8Cv"/>
+</div>
+<span class="text-sm font-medium font-body text-on-surface">Dr. Elias Vance</span>
+</div>
+</div>
+</div>
+<!-- Grid Layout for remaining articles -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+<!-- Article Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 ghost-border flex flex-col gap-4 hover:ambient-shadow transition-shadow cursor-pointer group">
+<div class="w-full aspect-[16/9] rounded-lg overflow-hidden bg-surface-variant">
+<img alt="Camera Lens" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="close up of a professional camera lens reflecting soft blue and white light, technical precision feel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlkfmzcHtXA5tkWsIZUnKd2jR40RNcRUGciOYCOFgKrph6KKJoMBGeguVNp1mdcSuxhlGvYikI9nJGQ_K4Rk41c4SFLoocXhKQEo4uGxi0iXZHPiu3v7yZr95vfRzje7PSTmERlDgIcKq90K98PhqIp3ylLF3Q0Suxok0gL8jLUMHE_HOG4CN9Kg5HM4DWcH7V1HUveK3ZovdAY3SIdFgNbL7FjRYz5yiTGlpFZsAYrG_3GldEHo6RHVeEqhbm3ebuVYVKq8H6NRUX"/>
+</div>
+<div class="flex items-center gap-3 text-xs font-label text-on-surface-variant uppercase tracking-wider mt-2">
+<span>Cinematography</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>8 Min Read</span>
+</div>
+<h4 class="text-lg font-bold font-headline text-on-background leading-tight group-hover:text-primary transition-colors">Depth of Field Analysis via Machine Learning</h4>
+<p class="text-on-surface-variant font-body text-sm line-clamp-2">Understanding how neural networks estimate focal planes and synthetically alter bokeh characteristics in post-production environments.</p>
+</div>
+<!-- Article Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 ghost-border flex flex-col gap-4 hover:ambient-shadow transition-shadow cursor-pointer group">
+<div class="w-full aspect-[16/9] rounded-lg overflow-hidden bg-surface-variant">
+<img alt="Video Editing Timeline" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="abstract view of a video editing timeline with colorful audio and video tracks on a dark monitor screen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-_XhXbnwaxZNp1nLRdUQVpWlcjtvMslsKk9UkpjJwBM2zfN5lZMIKFt3RLUaWUgxZFBF_WX3JqMk_PRNr9NZm2K9f9aJ4zaVcWK-k3R8n6YkbIc2EjWAIlmaEdr6hMx4MVh4Q46BnTSo5atlpyQhE-70FAPV6hAIJ4hvrRBDRn-vBvGeM8lcTyM1cN-74APxana-RA_pNjWIpnnmEgKrRnnh4Mvr4KaRNTp4dugttBCBMN0e-Zd0YwolP5RTgAmTkUTlXiHyLmC3L"/>
+</div>
+<div class="flex items-center gap-3 text-xs font-label text-on-surface-variant uppercase tracking-wider mt-2">
+<span>Editing Techniques</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>15 Min Read</span>
+</div>
+<h4 class="text-lg font-bold font-headline text-on-background leading-tight group-hover:text-primary transition-colors">Rhythmic Pacing: Non-Linear Narrative Structures</h4>
+<p class="text-on-surface-variant font-body text-sm line-clamp-2">Techniques for establishing cadence in multi-cam setups using automated beat-detection and emotional tension mapping.</p>
+</div>
+<!-- Article Card 3 (Text heavy, no image) -->
+<div class="bg-surface-container-low rounded-xl p-6 md:p-8 flex flex-col gap-4 hover:bg-surface-container-highest transition-colors cursor-pointer border border-transparent hover:border-outline-variant/20">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-[20px]">description</span>
+<span class="text-xs font-label text-on-surface-variant uppercase tracking-wider">Protocol / Technical Spec</span>
+</div>
+<h4 class="text-xl font-bold font-headline text-on-background leading-tight">Zhishe API Standard for Meta-Data Injection</h4>
+<p class="text-on-surface-variant font-body text-sm leading-relaxed">Technical documentation on embedding geospatial, lens characteristic, and color space metadata directly into MXF wrappers during export.</p>
+<div class="mt-auto pt-4 flex items-center justify-between text-sm font-label text-on-surface-variant border-t border-outline-variant/20">
+<span>Version 2.4</span>
+<span>Updated 2 days ago</span>
+</div>
+</div>
+<!-- Article Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 ghost-border flex flex-col gap-4 hover:ambient-shadow transition-shadow cursor-pointer group">
+<div class="w-full aspect-[16/9] rounded-lg overflow-hidden bg-surface-variant relative">
+<img alt="AI Server Rack" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="rows of glowing server racks in a dark data center, representing artificial intelligence processing power" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8mJcuBz_eFnTs10kiUHvuTIavTq8K8fvi7tOYlBkGqsPfJz4Y1DEha9zm-5UabVk3eOe-phcgohhPP9_J_uFpN-6UBhzB1gaVkPcBuINBjCm_2TahcpaQn1XsuliyPrxAEPRArrnnPWrZmqOgoicjwRexlbE7AM221IczeB91TV1Dmey7zKmvRT1gS-sTNMYIie53LA8mkZA3XiEWnZgGave-GdkbdqwhMoFlsD7EV-f-Se1mNpg1dUwXlLGN4SD4ss6ftqel0cUu"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+<span class="absolute bottom-3 left-3 bg-surface-container-lowest/90 backdrop-blur px-2 py-1 rounded text-[10px] font-bold font-headline text-on-surface tracking-wider uppercase">Deep Dive</span>
+</div>
+<div class="flex items-center gap-3 text-xs font-label text-on-surface-variant uppercase tracking-wider mt-2">
+<span>AI Analysis Models</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>22 Min Read</span>
+</div>
+<h4 class="text-lg font-bold font-headline text-on-background leading-tight group-hover:text-primary transition-colors">Semantic Segmentation in Crowded Frames</h4>
+<p class="text-on-surface-variant font-body text-sm line-clamp-2">Evaluating the efficiency of masked region isolation when dealing with overlapping subjects in high-density documentary footage.</p>
+</div>
+</div>
+<!-- Pagination (Architectural style) -->
+<div class="mt-8 flex justify-center items-center gap-2 font-body text-sm">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors disabled:opacity-50">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-medium ambient-shadow">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors">3</button>
+<span class="text-outline-variant px-2">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors">12</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

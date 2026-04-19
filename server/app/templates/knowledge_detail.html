@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}知识详情 - 智摄{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <div class="eyebrow-row" style="margin-bottom: 0.7rem;">
+      <a href="/knowledge">Knowledge Base</a>
+      <span>/</span>
+      <span>{{ item.category }}</span>
+    </div>
+    <h1>{{ item.title }}</h1>
+    <div class="tag-list" style="margin-top: 1rem;">
+      <span class="badge">{{ item.category }}</span>
+      {% for tag in item.tags %}
+      <span class="tag">#{{ tag }}</span>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="page-actions">
+    <a class="button button-secondary" href="/knowledge">返回知识库</a>
+  </div>
+</section>
+
+<section class="workspace-grid">
+  <article class="panel">
+    <div class="callout">
+      <strong>阅读提示</strong>
+      当前知识详情页已经按你新增的设计稿第二轮精修，侧边栏聚焦在要点、标签和相关文章，而正文保留长文阅读体验。
+    </div>
+    <div class="divider-space"></div>
+    <div class="markdown-body">
+      {{ item.content_html | safe }}
+    </div>
+  </article>
+
+  <aside class="panel panel-muted toc-card">
+    <div class="filter-group">
+      <h3>On This Page</h3>
+      <ul class="toc-list">
+        <li>核心观点与适用场景</li>
+        <li>技术细节与实现提示</li>
+        <li>可直接复用到 Prompt 的关键词</li>
+        <li>与当前条目相关的延展阅读</li>
+      </ul>
+    </div>
+
+    {% if related_items %}
+    <div class="filter-group">
+      <h3>Related</h3>
+      <div class="history-list">
+        {% for related in related_items %}
+        <article class="history-item">
+          <div>
+            <strong><a href="/knowledge/{{ related.id }}">{{ related.title }}</a></strong>
+            <p class="micro-copy">{{ related.category }}</p>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="filter-group">
+      <h3>Metadata</h3>
+      <div class="mini-card">
+        <strong>分类</strong>
+        <p class="micro-copy">{{ item.category }}</p>
+      </div>
+      <div class="mini-card">
+        <strong>标签数</strong>
+        <p class="micro-copy">{{ item.tags|length }}</p>
+      </div>
+      <div class="mini-card">
+        <strong>条目 ID</strong>
+        <p class="micro-copy">#{{ item.id }}</p>
+      </div>
+    </div>
+  </aside>
+</section>
+{% endblock %}

@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% from "partials/ui.html" import status_badge, task_type_badge %}
+{% block title %}工作台 - 智摄{% endblock %}
+{% block content %}
+<section class="hero-banner">
+  <article class="hero-panel">
+    <span class="eyebrow">智摄工作台</span>
+    <h1 class="page-title">欢迎回来，{{ current_user.display_name or current_user.username }}</h1>
+    <p class="page-copy">
+      当前工作流聚焦在「上传分析包 -> 生成 Prompt -> 回填模型结果 -> 生成结构化报告」。
+      这版首页优先服务你日常最常用的分析闭环，而不是堆功能入口。
+    </p>
+
+    <div class="action-grid">
+      <a class="action-card" href="/tasks/new">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_task</span>
+        <strong>新建分析任务</strong>
+        <span>创建拆解或优化任务，并可在创建时直接上传分析包 ZIP。</span>
+      </a>
+      <a class="action-card" href="/tasks">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment</span>
+        <strong>查看任务队列</strong>
+        <span>快速进入历史任务，继续 Prompt、回填或报告环节。</span>
+      </a>
+      <a class="action-card" href="/knowledge">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+        <strong>浏览知识库</strong>
+        <span>从静态知识条目中提炼规则、风格词和方法论。</span>
+      </a>
+      <a class="action-card" href="/settings">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">tune</span>
+        <strong>检查默认模板</strong>
+        <span>确认参考拆解和优化模板的绑定关系是否正确。</span>
+      </a>
+    </div>
+  </article>
+
+  <div class="stat-grid">
+    <article class="stat-card">
+      <span class="stat-label">总任务数</span>
+      <strong>{{ task_count }}</strong>
+      <span class="micro-copy">当前账号名下已创建的全部任务。</span>
+    </article>
+    <article class="stat-card">
+      <span class="stat-label">进行中任务</span>
+      <strong>{{ active_task_count }}</strong>
+      <span class="micro-copy">尚未产出最终报告的任务数量。</span>
+    </article>
+    <article class="stat-card">
+      <span class="stat-label">累计报告</span>
+      <strong>{{ report_count }}</strong>
+      <span class="micro-copy">已生成并入库的结构化报告总数。</span>
+    </article>
+    <article class="stat-card">
+      <span class="stat-label">知识条目</span>
+      <strong>{{ knowledge_count }}</strong>
+      <span class="micro-copy">可用于 Prompt 拼装和分析参考的静态条目。</span>
+    </article>
+  </div>
+</section>
+
+<section class="grid grid-sidebar">
+  <article class="panel">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">最近任务</h2>
+        <p class="section-subtitle">从这里直接回到最近的分析上下文。</p>
+      </div>
+      <a class="button button-secondary" href="/tasks">查看全部</a>
+    </div>
+
+    {% if recent_tasks %}
+    <div class="task-card-list">
+      {% for task in recent_tasks %}
+      <article class="task-card">
+        <div class="task-card-header">
+          <div>
+            <div class="pills">
+              {{ task_type_badge(task.task_type) }}
+              {{ status_badge(task.status) }}
+            </div>
+            <h3 style="margin-top: 0.75rem;">
+              <a href="/tasks/{{ task.id }}">{{ task.title }}</a>
+            </h3>
+            <p class="micro-copy" style="margin-top: 0.45rem;">
+              {{ task.description or '还没有填写任务说明，可以进入详情页继续补充。' }}
+            </p>
+          </div>
+          <a class="button button-secondary" href="/tasks/{{ task.id }}">继续处理</a>
+        </div>
+        <div class="meta-row">
+          <span class="meta-item">
+            <span class="material-symbols-outlined">folder_open</span>
+            <span>任务 #{{ task.id }}</span>
+          </span>
+          <span class="meta-item">
+            <span class="material-symbols-outlined">schedule</span>
+            <span>{{ task.updated_at.strftime('%Y-%m-%d %H:%M') if task.updated_at else '-' }}</span>
+          </span>
+          <span class="meta-item">
+            <span class="material-symbols-outlined">movie</span>
+            <span>{{ task.source_video_name or '待导入分析包' }}</span>
+          </span>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <span class="material-symbols-outlined">video_library</span>
+      <strong>还没有任务</strong>
+      <p class="muted">先创建一个拆解或优化任务，把最小链路跑起来。</p>
+      <a class="button" href="/tasks/new">立即新建</a>
+    </div>
+    {% endif %}
+  </article>
+
+  <div class="stack">
+    <article class="panel panel-muted">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">当前默认模板</h2>
+          <p class="section-subtitle">工作台优先展示与你首版链路直接相关的模板绑定。</p>
+        </div>
+      </div>
+      <div class="info-list">
+        <div class="info-item">
+          <dt>参考拆解模板</dt>
+          <dd>{{ default_templates.get('default_prompt_template_reference', '未设置') }}</dd>
+        </div>
+        <div class="info-item">
+          <dt>优化建议模板</dt>
+          <dd>{{ default_templates.get('default_prompt_template_improve', '未设置') }}</dd>
+        </div>
+      </div>
+    </article>
+
+    <article class="panel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">最近报告</h2>
+          <p class="section-subtitle">便于你快速复盘最近一次分析结论。</p>
+        </div>
+      </div>
+      {% if recent_reports %}
+      <div class="history-list">
+        {% for report in recent_reports %}
+        <article class="history-item">
+          <div>
+            <strong><a href="/tasks/{{ report.task_id }}/report">{{ report.title }}</a></strong>
+            <p class="micro-copy">任务 #{{ report.task_id }} · {{ report.created_at.strftime('%Y-%m-%d %H:%M') if report.created_at else '-' }}</p>
+            <p style="margin-top: 0.45rem;">{{ report.summary or '这份报告还没有生成摘要。' }}</p>
+          </div>
+          <a class="button button-secondary" href="/tasks/{{ report.task_id }}/report">查看</a>
+        </article>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="muted">还没有报告，先完成一次 Prompt 生成和结果回填。</p>
+      {% endif %}
+    </article>
+  </div>
+</section>
+{% endblock %}
