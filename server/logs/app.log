@@ -1,0 +1,10 @@
+2026-04-19 13:05:44,185 INFO photography.request request method=GET path=/login status=200 duration_ms=13.77
+2026-04-19 13:05:44,188 INFO httpx HTTP Request: GET http://testserver/login "HTTP/1.1 200 OK"
+2026-04-19 13:05:44,302 INFO photography.request request method=GET path=/static/styles.css status=200 duration_ms=111.85
+2026-04-19 13:05:44,305 INFO httpx HTTP Request: GET http://testserver/static/styles.css "HTTP/1.1 200 OK"
+2026-04-19 13:05:59,171 INFO photography.request request method=GET path=/ status=303 duration_ms=1.61
+2026-04-19 13:05:59,173 INFO httpx HTTP Request: GET http://testserver/ "HTTP/1.1 303 See Other"
+2026-04-19 13:05:59,188 INFO photography.request request method=GET path=/login status=200 duration_ms=14.32
+2026-04-19 13:05:59,209 INFO httpx HTTP Request: GET http://testserver/login "HTTP/1.1 200 OK"
+2026-04-19 13:10:07,838 INFO photography.request request method=GET path=/login status=200 duration_ms=15.58
+2026-04-19 13:10:07,840 INFO httpx HTTP Request: GET http://testserver/login "HTTP/1.1 200 OK"

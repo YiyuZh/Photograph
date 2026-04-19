@@ -87,6 +87,7 @@ docker compose ps
 - `http://127.0.0.1:18120`
 
 如果你要接入现有 `hiremate-caddy` 统一公网网关，智摄容器必须同时加入 `shared_gateway`，这样 Caddy 才能通过 `photography-app:8000` 访问它。
+如果站点内容能打开、健康检查也正常，但页面像“没加载 CSS 一样全部裸奔”，优先检查是否还是旧容器在运行；这版已经改成相对路径静态资源并开启了反向代理头支持，重新 `docker compose up -d --build` 后再做一次浏览器强制刷新。
 
 ## 数据库初始化
 

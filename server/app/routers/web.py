@@ -25,6 +25,7 @@ from app.services.task_service import create_task, delete_task, get_task, list_t
 
 templates = Jinja2Templates(directory=str((SERVER_DIR / "app" / "templates").resolve()))
 router = APIRouter()
+STYLE_ASSET_VERSION = int((SERVER_DIR / "app" / "static" / "styles.css").stat().st_mtime)
 
 
 def redirect_login() -> RedirectResponse:
@@ -35,9 +36,10 @@ def render(request: Request, template_name: str, context: dict, user: User | Non
     base_context = {
         "request": request,
         "current_user": user,
+        "asset_version": STYLE_ASSET_VERSION,
     }
     base_context.update(context)
-    return templates.TemplateResponse(template_name, base_context)
+    return templates.TemplateResponse(request, template_name, base_context)
 
 
 @router.get("/login")

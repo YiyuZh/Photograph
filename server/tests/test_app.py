@@ -119,3 +119,11 @@ def test_full_workflow():
         knowledge_response = client.get("/api/knowledge-items")
         assert knowledge_response.status_code == 200
         assert len(knowledge_response.json()["data"]) >= 5
+
+
+def test_login_page_uses_relative_stylesheet():
+    with TestClient(app) as client:
+        response = client.get("/login")
+        assert response.status_code == 200
+        assert '/static/styles.css?v=' in response.text
+        assert 'http://testserver/static/styles.css' not in response.text
