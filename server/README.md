@@ -27,7 +27,7 @@ server/
 cd D:/apps/Photography/server
 python -m venv .venv
 .venv/Scripts/activate
-pip install -r requirements.txt
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 ```
 
 2. 配置环境变量
@@ -41,6 +41,7 @@ copy .env.example .env
 - `SECRET_KEY`
 - `DEFAULT_PASSWORD`
 - `APP_BASE_URL`
+- `PIP_INDEX_URL`（默认已写成清华 PyPI，可按需覆盖）
 
 3. 启动开发环境
 
@@ -66,6 +67,14 @@ uvicorn app.main:app --reload
 cp .env.example .env
 ```
 
+`.env.example` 已经把 Docker build 默认源设成清华 PyPI：
+
+- `PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple`
+- `PIP_TRUSTED_HOST=pypi.tuna.tsinghua.edu.cn`
+- `PIP_DEFAULT_TIMEOUT=120`
+- `PIP_RETRIES=8`
+- `SHARED_CADDY_NETWORK=shared_gateway`
+
 2. 启动
 
 ```bash
@@ -76,6 +85,8 @@ docker compose ps
 默认预览端口：
 
 - `http://127.0.0.1:18120`
+
+如果你要接入现有 `hiremate-caddy` 统一公网网关，智摄容器必须同时加入 `shared_gateway`，这样 Caddy 才能通过 `photography-app:8000` 访问它。
 
 ## 数据库初始化
 
@@ -143,5 +154,6 @@ pytest
 
 - 服务器目录建议：`/opt/apps/photography`
 - 预览端口建议：`127.0.0.1:18120`
+- 统一网关网络建议：`shared_gateway`
 - SQLite 与 `storage/` 应做宿主机持久化挂载
 - 正式公网入口建议通过统一 Caddy 网关转发
